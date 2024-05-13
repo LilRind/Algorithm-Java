@@ -46,7 +46,7 @@ public class LeetCode_1004 {
         int n = sc.nextInt(); // 数组长度
         int[] nums = new int[n];
         for (int i = 0; i < n; i++) {
-            nums[i] = sc.nextInt();
+            nums[i] = sc.nextInt(); // 输入数组元素
         }
 
         System.out.println(longestOnes(nums, k));
