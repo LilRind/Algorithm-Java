@@ -34,9 +34,9 @@ public class LeetCode_1004 {
             while (cnt0 > k) { // 当窗口内的0的数量 > k，左移左指针直到0的数量小于k
                 cnt0 -= 1 - nums[left++]; // 左移左指针，是0则 cnt0 -1
             }
-            ans = Math.max(ans, right - left + 1);
+            ans = Math.max(ans, right - left + 1); // 每右移一位右指针都要计算最大值。
         }
-        return ans;
+        return ans; // 返回最大值
     }
 
 
