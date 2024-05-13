@@ -31,8 +31,8 @@ public class LeetCode_1004 {
         int ans = 0, left = 0, cnt0 = 0;
         for (int right = 0; right < nums.length; right++) {
             cnt0 += 1 - nums[right]; // 0 变成 1，用来统计 cnt0
-            while (cnt0 > k) {
-                cnt0 -= 1 - nums[left++];
+            while (cnt0 > k) { // 当窗口内的0的数量 > k，左移左指针直到0的数量小于k
+                cnt0 -= 1 - nums[left++]; // 左移左指针，是0则 cnt0 -1
             }
             ans = Math.max(ans, right - left + 1);
         }
