@@ -12,11 +12,11 @@ public class TreeNode {
         this.right = right;
     }
 
-    public void dfs(TreeNode root){
+    // 深度遍历打印二叉树节点的值
+    public static void printDfs(TreeNode root){
         if(root != null) System.out.print(root.val + " ");
-        if(root.left != null) dfs(root.left);
-        if(root.right != null) dfs(root.right);
-
+        if(root.left != null) printDfs(root.left);
+        if(root.right != null) printDfs(root.right);
     }
 
 }
