@@ -62,6 +62,7 @@ public class LeetCode_102 {
 //
 //    }
 
+    // bfs
     public static List<List<Integer>> levelOrder(TreeNode root) {
         // 构建返回结果
         List<List<Integer>> ret = new ArrayList<List<Integer>>();
@@ -75,10 +76,10 @@ public class LeetCode_102 {
         queue.offer(root);
         // 如果队列不为空，为空则代表节点遍历完闭
         while (!queue.isEmpty()) {
-            List<Integer> level = new ArrayList<Integer>();
-            int currentLevelSize = queue.size();
+            List<Integer> level = new ArrayList<Integer>(); // 每一层的临时存储数组
+            int currentLevelSize = queue.size(); // 每一层的节点个数
             for (int i = 1; i <= currentLevelSize; ++i) {
-                TreeNode node = queue.poll();
+                TreeNode node = queue.poll(); // 弹出每一层的
                 level.add(node.val);
                 if (node.left != null) {
                     queue.offer(node.left);
