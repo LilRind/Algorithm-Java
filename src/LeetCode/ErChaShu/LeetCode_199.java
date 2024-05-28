@@ -44,6 +44,7 @@ public class LeetCode_199 {
         System.out.println(rightSideView(a).toString());
     }
 
+
     // 第一次做，思路是bfs + 队列优先遍历右子节点，成功了
     public static List<Integer> rightSideView(TreeNode root) {
         List<Integer> res = new ArrayList<>(); // 返回结果
