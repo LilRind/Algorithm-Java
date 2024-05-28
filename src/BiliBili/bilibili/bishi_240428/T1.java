@@ -1,6 +1,5 @@
-package BiliBili.bilibili_24_0428;
+package BiliBili.bilibili.bishi_240428;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
