@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 // 返回存在环的那个节点
+// 重点关注
 public class LeetCode_142 {
     public static void main(String[] args) {
         // 构造链表

@@ -17,9 +17,11 @@ public class ListNode {
 
 
     public static void printNodes(ListNode head){
+        if(head == null) System.out.println("head is null");
         while(head != null){
             System.out.print(head.val + " ");
             head = head.next;
         }
+        System.out.println();
     }
 }

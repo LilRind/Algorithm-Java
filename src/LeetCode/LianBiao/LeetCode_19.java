@@ -5,6 +5,7 @@ import LeetCode.LianBiao.ListNode.ListNode;
 import static LeetCode.LianBiao.ListNode.ListNode.printNodes;
 
 // 19. 删除链表的倒数第 N 个结点
+// 做出来了，但是代码可以精简
 public class LeetCode_19 {
     public static void main(String[] args) {
         ListNode head = new ListNode(1);

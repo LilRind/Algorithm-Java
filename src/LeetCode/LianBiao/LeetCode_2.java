@@ -18,6 +18,7 @@ import static LeetCode.LianBiao.ListNode.ListNode.printNodes;
 输入：l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
 输出：[8,9,9,9,0,0,0,1]
  */
+// 重点关注
 public class LeetCode_2 {
     public static void main(String[] args) {
         // 构造链表
