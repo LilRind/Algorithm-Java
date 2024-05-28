@@ -30,7 +30,18 @@ import java.util.Queue;
 // https://leetcode.cn/problems/binary-tree-right-side-view/description/?envType=study-plan-v2&envId=top-100-liked
 public class LeetCode_199 {
     public static void main(String[] args) {
+        TreeNode a = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(3);
+        TreeNode node4 = new TreeNode(5);
+        TreeNode node5 = new TreeNode(4);
+        // 构建节点关系
+        a.left = node2;
+        a.right = node3;
+        node2.right = node4;
+        node3.right = node5;
 
+        System.out.println(rightSideView(a).toString());
     }
 
     // 第一次做，思路是bfs + 队列优先遍历右子节点，成功了
