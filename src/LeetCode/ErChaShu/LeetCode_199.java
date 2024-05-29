@@ -86,7 +86,7 @@ public class LeetCode_199 {
     // 灵神：先递归右子树，再递归左子树，当某个深度首次到达时，对应的节点就在右视图中
     /*
     public List<Integer> rightSideView(TreeNode root) {
-        List<Integer> ans = new ArrayList<>();
+        List<Integer> ans = new ArrayList<>(); // 返回结果List
         dfs(root, 0, ans);
         return ans;
     }
@@ -95,11 +95,11 @@ public class LeetCode_199 {
         if (root == null) {
             return;
         }
-        if (depth == ans.size()) { // 这个深度首次遇到
+        if (depth == ans.size()) { // 这个深度首次遇到，添加进返回结果List
             ans.add(root.val);
         }
         dfs(root.right, depth + 1, ans); // 先递归右子树，保证首次遇到的一定是最右边的节点
-        dfs(root.left, depth + 1, ans);
+        dfs(root.left, depth + 1, ans); // 右子树没有节点，再递归左子树
     }
      */
 
