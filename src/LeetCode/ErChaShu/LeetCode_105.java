@@ -21,13 +21,13 @@ public class LeetCode_105 {
 
     static HashMap<Integer, Integer> dic = new HashMap<>();
     public static TreeNode buildTree(int[] preorder, int[] inorder) {
-        for(int i = 0; i < inorder.length; i++) // 保存中序节点的索引
+        for(int i = 0; i < inorder.length; i++) // 保存中序列表中节点的索引
             dic.put(inorder[i], i);
         return recur(preorder, 0, 0, inorder.length - 1);
     }
     // （节点在前序列表中的索引，中序列表左边界，中序列表右边界）
     static TreeNode recur(int[] preorder, int root, int left, int right) {
-        if (left > right) return null;                          // 递归终止
+        if (left > right) return null;                          // 已经越过叶节点，递归终止
         TreeNode node = new TreeNode(preorder[root]);          // 建立根节点
         // 前序列表中的节点在中序列表中的索引
         int i = dic.get(preorder[root]);                       // 划分根节点、左子树、右子树
