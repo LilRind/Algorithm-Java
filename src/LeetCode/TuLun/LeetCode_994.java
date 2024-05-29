@@ -20,6 +20,7 @@ import java.util.List;
 // 灵神：多源 BFS
 // https://leetcode.cn/problems/rotting-oranges/solutions/2773461/duo-yuan-bfsfu-ti-dan-pythonjavacgojsrus-yfmh/?envType=study-plan-v2&envId=top-100-liked
 
+// 重点关注
 // 994. 腐烂的橘子
 public class LeetCode_994 {
 
@@ -69,13 +70,13 @@ public class LeetCode_994 {
 
         int ans = -1;
         while (!q.isEmpty()) {
-            ans++; // 经过一分钟
+            ans++; // 经过一分钟，最初的情况是0，即初始阶段出现腐烂的橘子
             List<int[]> tmp = q; // 腐烂的橘子的行、列，可能是多个
             q = new ArrayList<>(); // 清空，之后添加被腐烂的橘子
             for (int[] pos : tmp) { // 这一分钟，每个已经腐烂的橘子行、列
                 for (int[] d : DIRECTIONS) { // 四个方向，腐烂新鲜的橘子
-                    int i = pos[0] + d[0]; // 行+1
-                    int j = pos[1] + d[1]; // 列+1
+                    int i = pos[0] + d[0]; // 行上下变化
+                    int j = pos[1] + d[1]; // 列左右变化
                     if (0 <= i && i < m && 0 <= j && j < n && grid[i][j] == 1) { // 腐烂新鲜的橘子
                         fresh--; // 新鲜的橘子数量-1
                         grid[i][j] = 2; // 变成腐烂橘子
