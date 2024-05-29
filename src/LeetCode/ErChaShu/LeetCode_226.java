@@ -19,7 +19,7 @@ public class LeetCode_226 {
 
         invertTree(root.left); // 递归交换左子树
         invertTree(root.right); // 递归交换右子树
-
+        // 交换节点
         TreeNode temp = root.left;
         root.left = root.right;
         root.right = temp;
