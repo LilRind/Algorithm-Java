@@ -30,6 +30,7 @@ import java.util.Queue;
 // https://leetcode.cn/problems/binary-tree-right-side-view/description/?envType=study-plan-v2&envId=top-100-liked
 public class LeetCode_199 {
     public static void main(String[] args) {
+        // 示例1
         TreeNode a = new TreeNode(1);
         TreeNode node2 = new TreeNode(2);
         TreeNode node3 = new TreeNode(3);
@@ -42,6 +43,16 @@ public class LeetCode_199 {
         node3.right = node5;
 
         System.out.println(rightSideView(a).toString());
+        // 示例2
+        TreeNode b = new TreeNode(1);
+        TreeNode node6 = new TreeNode(3);
+
+        b.right = node6;
+
+        System.out.println(rightSideView(b).toString());
+
+
+
     }
 
 
