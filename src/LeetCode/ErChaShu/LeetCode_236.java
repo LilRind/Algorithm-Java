@@ -15,25 +15,44 @@ import LeetCode.ErChaShu.TreeNode.TreeNode;
 public class LeetCode_236 {
     public static void main(String[] args) {
 
+        // 示例2
+        TreeNode b = new TreeNode(5);
+        TreeNode node4 = new TreeNode(2);
+        TreeNode node5 = new TreeNode(4);
+
+        b.right = node4;
+        node4.right = node5;
+
+        System.out.println(lowestCommonAncestor(b, b, node5).val);
     }
 
-    // 灵神：递归
+    // 灵神：递归，掌握
     /*
     求二叉树的最近公共祖先问题，
-    拆解成这个节点的左、右子树下是否有p、q节点或者p节点下是否有q或者q节点是否有p，这就是递归终止条件
-     */
+    拆解成这个节点的左、右子树下各有p、q节点或者p节点下是否有q或者q节点是否有p，这就是递归终止条件
+    k神的写法：更容易理解一些
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null || root == p || root == q) return root;
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if(left == null && right == null) return null; // 1.
+        if(left == null) return right; // 3.
+        if(right == null) return left; // 4.
+        return root; // 2. if(left != null and right != null)
+    }
+     */
+    public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         // 该节点是否是空节点、p、q节点，是就直接返回
         if (root == null || root == p || root == q) { // 当前节点是空节点、p、q节点，直接返回
             return root;
         }
-        // 递归左、右子树
+        // 得到递归左、右子树的结果left、right
         TreeNode left = lowestCommonAncestor(root.left, p, q);
         TreeNode right = lowestCommonAncestor(root.right, p, q);
-        if (left != null && right != null) { // 左、右子树都找到，返回当前节点
+        if (left != null && right != null) { // p、q各在左、右子树，返回当前节点，直到返回至根节点
             return root;
         }
-        // 只有左/右子树找到，返回左/右子树递归结果，返回上一个节点
+        // p,q都在左或右子树，返回左或右子树递归结果，直到返回至根节点
         return left != null ? left : right;
     }
 
