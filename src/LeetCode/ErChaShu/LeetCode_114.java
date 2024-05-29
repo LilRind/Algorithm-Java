@@ -15,7 +15,6 @@ public class LeetCode_114 {
     }
 
 
-
     /*
     // 官方解法：递归前序遍历，掌握
     public void flatten(TreeNode root) {
