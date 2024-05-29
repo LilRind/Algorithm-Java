@@ -11,6 +11,7 @@ import LeetCode.ErChaShu.TreeNode.TreeNode;
 // K神：返回结果有4种情况，题解中做了详细讨论
 // https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/solutions/240096/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-hou-xu/?envType=study-plan-v2&envId=top-100-liked
 
+// 重点关注
 // 236. 二叉树的最近公共祖先
 public class LeetCode_236 {
     public static void main(String[] args) {
