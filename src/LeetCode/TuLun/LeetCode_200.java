@@ -3,6 +3,11 @@ package LeetCode.TuLun;
 import java.util.LinkedList;
 import java.util.Queue;
 
+// K神
+// https://leetcode.cn/problems/number-of-islands/solutions/16884/number-of-islands-shen-du-you-xian-bian-li-dfs-or-/?envType=study-plan-v2&envId=top-100-liked
+
+// 重点关注
+// 200.岛屿数量
 public class LeetCode_200 {
     public static void main(String[] args) {
         char[][] a = {
@@ -49,7 +54,7 @@ public class LeetCode_200 {
     }
 
 
-    // K神：BFS
+    // K神：BFS，可以掌握
     /*
     public int numIslands(char[][] grid) {
         int count = 0;
