@@ -14,9 +14,24 @@ public class TreeNode {
 
     // 深度遍历打印二叉树节点的值
     public static void printDfs(TreeNode root){
-        if(root != null) System.out.print(root.val + " ");
-        if(root.left != null) printDfs(root.left);
-        if(root.right != null) printDfs(root.right);
+        if(root == null) { // 为空，输出null，直接返回
+            System.out.print("null" + " ");
+            return;
+        }else {
+            System.out.print(root.val + " "); // 有值，输出
+        }
+        if(root.left == null && root.right == null) return; // 叶子节点，直接返回
+        if(root.left != null){
+            printDfs(root.left);
+        }else{
+            System.out.print("null" + " ");
+        }
+        if(root.right != null){
+            printDfs(root.right);
+        }else {
+            System.out.print("null" + " ");
+        }
+
     }
 
 }

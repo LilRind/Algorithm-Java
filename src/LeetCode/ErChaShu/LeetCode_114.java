@@ -2,6 +2,12 @@ package LeetCode.ErChaShu;
 
 import LeetCode.ErChaShu.TreeNode.TreeNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static LeetCode.ErChaShu.TreeNode.TreeNode.printDfs;
+import static LeetCode.LianBiao.ListNode.Node.printNodes;
+
 // 解法 1-3
 // https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/solutions/17274/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by--26/?envType=study-plan-v2&envId=top-100-liked
 
@@ -11,31 +17,57 @@ import LeetCode.ErChaShu.TreeNode.TreeNode;
 // 重点关注
 public class LeetCode_114 {
     public static void main(String[] args) {
+        // 示例1：
+        TreeNode a = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(5);
+        TreeNode node4 = new TreeNode(3);
+        TreeNode node5 = new TreeNode(4);
+        TreeNode node6 = new TreeNode(6);
+        // 构造关系
+        a.left = node2;
+        a.right = node3;
+        node2.left = node4;
+        node2.right = node5;
+        node3.right = node6;
+        //
+        flatten(a);
+        printDfs(a);
+        // 输出空格行
+        System.out.println();
+        // 示例2
+        TreeNode b = null;
 
+        flatten(b);
+        printDfs(b);
     }
 
-
-    /*
-    // 官方解法：递归前序遍历，掌握
-    public void flatten(TreeNode root) {
+    // 官方方法一：递归前序遍历，，掌握
+    public static void flatten(TreeNode root) {
         List<TreeNode> list = new ArrayList<TreeNode>();
-        preorderTraversal(root, list);
+        preorderTraversal(root, list); // 前序遍历得到前序List
         int size = list.size();
+        // 其中 right 子指针指向链表中下一个结点，而左子指针始终为 null
         for (int i = 1; i < size; i++) {
-            TreeNode prev = list.get(i - 1), curr = list.get(i);
+            TreeNode prev = list.get(i - 1), curr = list.get(i); // 获得前驱节点
             prev.left = null;
             prev.right = curr;
         }
     }
-
-    public void preorderTraversal(TreeNode root, List<TreeNode> list) {
+    // 前序遍历，得到前序List
+    public static void preorderTraversal(TreeNode root, List<TreeNode> list) {
         if (root != null) {
             list.add(root);
             preorderTraversal(root.left, list);
             preorderTraversal(root.right, list);
         }
     }
-    // 官方解法：迭代前序遍历，
+
+    /*
+
+
+
+    // 官方方法一：迭代前序遍历，即栈实现前序遍历
     public void flatten(TreeNode root) {
         List<TreeNode> list = new ArrayList<TreeNode>();
         Deque<TreeNode> stack = new LinkedList<TreeNode>();
@@ -81,7 +113,7 @@ public class LeetCode_114 {
         }
     }
 
-    // 方法三：寻找前驱节点，与解法1类似
+    // 方法三：寻找前驱节点，与解法1类似，可以掌握
     public void flatten(TreeNode root) {
         TreeNode curr = root;
         while (curr != null) {
@@ -101,10 +133,6 @@ public class LeetCode_114 {
 
 }
 
-作者：力扣官方题解
-链接：https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/solutions/356853/er-cha-shu-zhan-kai-wei-lian-biao-by-leetcode-solu/
-来源：力扣（LeetCode）
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
      */
 
     // 解法1：寻找前驱节点，自顶向下
