@@ -18,6 +18,10 @@ package LeetCode.ErFenChaZhao;
 
 // 灵神：多种写法
 // https://leetcode.cn/problems/search-insert-position/solutions/2023391/er-fen-cha-zhao-zong-shi-xie-bu-dui-yi-g-nq23/?envType=study-plan-v2&envId=top-100-liked
+// 灵神：二分查找 红蓝染色法
+// https://www.bilibili.com/video/BV1AP41137w7/?vd_source=cd981fb854a559572119bac96c0726bf
+// 搜索旋转排序数组【基础算法精讲 05】
+// https://www.bilibili.com/video/BV1QK411d76w/?vd_source=cd981fb854a559572119bac96c0726bf
 
 // 35. 搜索插入位置
 public class LeetCode_35 {
