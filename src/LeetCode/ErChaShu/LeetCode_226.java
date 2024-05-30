@@ -11,6 +11,7 @@ public class LeetCode_226 {
 
     }
 
+
     // 第一次解出，递归交换左右节点。还可以优化，K神的递归法就是优化过后的
     public TreeNode invertTree(TreeNode root) {
         if(root == null){
