@@ -2,26 +2,51 @@ package LeetCode.ErChaShu;
 
 import LeetCode.ErChaShu.TreeNode.TreeNode;
 
+/*
+输入：root = [1,2,3,4,5]
+输出：3
+解释：3 ，取路径 [4,2,1,3] 或 [5,2,1,3] 的长度。
+
+输入：root = [1,2]
+输出：1
+ */
+
 // 灵神：递归 + 保存最大深度
 // https://leetcode.cn/problems/diameter-of-binary-tree/solutions/2227017/shi-pin-che-di-zhang-wo-zhi-jing-dpcong-taqma/?envType=study-plan-v2&envId=top-100-liked
 
-
+// 重点关注
 // 543. 二叉树的直径
 public class LeetCode_543 {
     public static void main(String[] args) {
+        TreeNode a = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(3);
+        TreeNode node4 = new TreeNode(4);
+        TreeNode node5 = new TreeNode(5);
+
+        a.left = node2;
+        a.right = node3;
+        node2.left = node4;
+        node2.right = node5;
+
+        System.out.println(diameterOfBinaryTree(a));
+
+        TreeNode b = new TreeNode(1);
+        TreeNode node6 = new TreeNode(2);
+
+        b.left = node6;
 
     }
 
-    // 再写，
-    private int ans;
+    // 再写，考虑保存最大深度
+    private static int ans;
 
-    public int diameterOfBinaryTree(TreeNode root) {
+    public static int diameterOfBinaryTree(TreeNode root) {
         dfs(root);
         return ans;
     }
 
-
-    private int dfs(TreeNode node) {
+    private static int dfs(TreeNode node) {
         if (node == null)
             return -1; // 下面 +1 后，对于叶子节点就刚好是 0
         int lLen = dfs(node.left) + 1; // 左子树最大链长+1
