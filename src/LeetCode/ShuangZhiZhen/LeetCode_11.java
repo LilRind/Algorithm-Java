@@ -1,12 +1,19 @@
 package LeetCode.ShuangZhiZhen;
 
+// 官方：掌握
+// https://leetcode.cn/problems/container-with-most-water/solutions/207215/sheng-zui-duo-shui-de-rong-qi-by-leetcode-solution/?envType=study-plan-v2&envId=top-100-liked
+
+// K神：更简洁的逻辑代码
+// https://leetcode.cn/problems/container-with-most-water/solutions/11491/container-with-most-water-shuang-zhi-zhen-fa-yi-do/?envType=study-plan-v2&envId=top-100-liked
+
+// 重点关注
 // 11. 盛最多水的容器
 public class LeetCode_11 {
     public static void main(String[] args) {
 
     }
 
-    // 掌握
+    // 掌握，O(N)
     // 再写，核心思想是，一开始 l指向数组首位，r指向数组末位，
     // 我们记录容器的最小高度h，只有当我们找到height[x] > h，才有可能更新max值，
     // 因为底(r - l)是在变小的，只有当height[x]变大，才有可能大于原先的max值
@@ -43,6 +50,20 @@ public class LeetCode_11 {
         }
         return max;
     }
+     */
+
+    // K神：更简洁的逻辑代码
+    /*
+    public int maxArea(int[] height) {
+        int i = 0, j = height.length - 1, res = 0;
+        while(i < j) {
+            res = height[i] < height[j] ?
+                Math.max(res, (j - i) * height[i++]):
+                Math.max(res, (j - i) * height[j--]);
+        }
+        return res;
+    }
+
      */
 
     // 掌握，之前写的
