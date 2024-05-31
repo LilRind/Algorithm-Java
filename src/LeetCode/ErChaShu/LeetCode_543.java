@@ -12,13 +12,14 @@ public class LeetCode_543 {
 
     }
 
-    // 再写
+    // 再写，
     private int ans;
 
     public int diameterOfBinaryTree(TreeNode root) {
         dfs(root);
         return ans;
     }
+
 
     private int dfs(TreeNode node) {
         if (node == null)
