@@ -25,7 +25,7 @@ public class LeetCode_416 {
 
     }
 
-
+    // 文末有详细分析
     // 灵神：掌握。f[i] 表示是否可以找到一个子集，使得其元素之和等于 i。
     // 在计算 f[i+1] 时，只会用到 f[i]，不会用到比 i 更早的状态。
     public boolean canPartition(int[] nums) {
@@ -42,16 +42,16 @@ public class LeetCode_416 {
         int s2 = 0;
         for (int x : nums) { // 对于每一个元素
             // 更新 s2，表示当前考虑过的元素的最大和，但不超过目标和 s
-            s2 = Math.min(s2 + x, s);
+            s2 = Math.min(s2 + x, s); // 前缀和
             // 从 s2 开始，向下遍历到 x
             // 这是因为我们要确保在考虑当前元素 x 时，计算出的新的子集和不超过 s
             // 同时避免重复计算更小的和
-            for (int j = s2; j >= x; j--) { // f[j]在[s2,s2+x]之中
+            for (int j = s2; j >= x; j--) {
                 // 更新 dp 数组：如果存在一个子集和为 j - x，
                 // 那么在加上 x 之后，就会有一个子集和为 j
+                // j在[x,s2+x]之中,f[x]和f[s2+x]必定为true，
+                // 而j-x在[0,s2]中，f[0,s2]的值与 元素x 无关，所以f[j-x]为true，则f[j]必定成立
                 f[j] = f[j] || f[j - x];
-                // dp[j] = true 表示存在一个子集和为 j
-                // 这个子集和是通过之前存在的一个子集和 (j - x) 加上当前元素 x 得到的
             }
         }
         return f[s];
@@ -126,3 +126,63 @@ public class LeetCode_416 {
     }
     */
 }
+
+// 详细分析
+/*
+4. 遍历数组 nums 并更新 f
+java
+复制代码
+int s2 = 0;
+for (int x : nums) {
+    s2 = Math.min(s2 + x, s);
+    for (int j = s2; j >= x; j--) {
+        f[j] = f[j] || f[j - x];
+    }
+}
+逐步分析每一步：
+
+第一次迭代 (x = 1)
+s2 = Math.min(s2 + x, s) = Math.min(0 + 1, 11) = 1
+内层循环：
+
+for (int j = 1; j >= 1; j--) {
+    f[j] = f[j] || f[j - 1]; // f[1] = f[1] || f[0] = false || true = true
+}
+f 数组更新为 [true, true, false, false, false, false, false, false, false, false, false, false]
+第二次迭代 (x = 5)
+s2 = Math.min(s2 + x, s) = Math.min(1 + 5, 11) = 6
+内层循环：
+
+for (int j = 6; j >= 5; j--) {
+    f[6] = f[6] || f[6 - 5]; // f[6] = f[6] || f[1] = false || true = true
+    f[5] = f[5] || f[5 - 5]; // f[5] = f[5] || f[0] = false || true = true
+}
+f 数组更新为 [true, true, false, false, false, true, true, false, false, false, false, false]
+第三次迭代 (x = 11)
+s2 = Math.min(s2 + x, s) = Math.min(6 + 11, 11) = 11
+内层循环：
+
+for (int j = 11; j >= 11; j--) {
+    f[11] = f[11] || f[11 - 11]; // f[11] = f[11] || f[0] = false || true = true
+}
+f 数组更新为 [true, true, false, false, false, true, true, false, false, false, false, true]
+第四次迭代 (x = 5)
+s2 = Math.min(s2 + x, s) = Math.min(11 + 5, 11) = 11
+内层循环：
+
+for (int j = 11; j >= 5; j--) {
+    f[11] = f[11] || f[11 - 5]; // f[11] = true || f[6] = true || true = true
+    f[10] = f[10] || f[10 - 5]; // f[10] = false || f[5] = false || true = true
+    f[9] = f[9] || f[9 - 5]; // f[9] = false || f[4] = false
+    f[8] = f[8] || f[8 - 5]; // f[8] = false || f[3] = false
+    f[7] = f[7] || f[7 - 5]; // f[7] = false || f[2] = false
+    f[6] = f[6] || f[6 - 5]; // f[6] = true || f[1] = true
+    f[5] = f[5] || f[5 - 5]; // f[5] = true || f[0] = true
+}
+f 数组更新为 [true, true, false, false, false, true, true, false, false, false, true, true]
+5. 返回结果
+
+return f[s]; // f[11] = true
+因为 f[11] 是 true，表示存在一个子集，其和为 11，因此返回 true。
+最终，代码确认 nums 数组可以分割成两个和相等的子集 [1, 5, 5] 和 [11]。
+ */
