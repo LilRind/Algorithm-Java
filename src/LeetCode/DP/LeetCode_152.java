@@ -17,8 +17,74 @@ import java.util.Scanner;
 输出: 0
 解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。
 
+-3,0,1,-2
+输出: 1
+
  */
 public class LeetCode_152 {
+
+    public static void main(String[] args) {
+        int[] a = {2, 3, -2, 4};
+        System.out.println(maxProduct(a));
+
+        int[] b = {-2, 0, -1};
+        System.out.println(maxProduct(b));
+
+        int[] c = {-3,0,1,-2};
+        System.out.println(maxProduct(c));
+
+        // acm模式
+        /*
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        for(int i =0; i<n; i++){
+            arr[i] = sc.nextInt();
+        }
+        System.out.println(maxProduct(arr));
+         */
+    }
+
+    //
+    public static int maxProduct(int[] nums) {
+        int res = nums[0]; // 确保返回的结果至少是nums中的单个元素
+        int ans = 1; // 保留每个连续非空连续子数组的乘积
+        for (int i = 0; i < nums.length; i++) { // 从左到右先乘
+            ans *= nums[i]; // 先乘
+            res = Math.max(res, ans);
+            if(nums[i] == 0) ans = 1; // 如果遇到元素0，则重新置为1
+        }
+        ans = 1; // 重新置为1
+        for (int i = nums.length-1; i >= 0; i--) { // 从右到左先乘
+            ans *= nums[i];
+            res = Math.max(res, ans);
+            if(nums[i] == 0) ans = 1; // 如果遇到元素0，则重新置为1
+        }
+        return res;
+    }
+
+    // 第一次未解出，存在一点小问题
+    /*
+    public static int maxProduct(int[] nums) {
+        int res = nums[0];
+        int ans = 1;
+        for (int i = 0; i < nums.length; i++) {
+            if(nums[i] == 0) ans = 1;
+            ans *= nums[i];
+            res = Math.max(res, ans);
+        }
+        ans = 1;
+        for (int i = nums.length-1; i >= 0; i--) {
+            if(nums[i] == 0) ans = 1;
+            ans *= nums[i];
+            res = Math.max(res, ans);
+        }
+        return res;
+    }
+     */
+
+    // 这是之前做的
+    /*
     public static int maxProduct(int[] nums) {
         // 获取输入数组的长度
         int length = nums.length;
@@ -49,16 +115,8 @@ public class LeetCode_152 {
         // 返回最大乘积
         return ans;
     }
+     */
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int[] arr = new int[n];
-        for(int i =0; i<n; i++){
-            arr[i] = sc.nextInt();
-        }
-        System.out.println(maxProduct(arr));
-    }
 }
 
 // 这是最简单的做法。由于负数的出现，会导致之前的最大变成最小，导致后续可能出现的最大变成负数，所以反向再遍历一次求最大。
