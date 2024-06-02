@@ -15,7 +15,8 @@ import java.util.Arrays;
 // 灵神：dp、记忆化搜索、递推
 // https://leetcode.cn/problems/partition-equal-subset-sum/solutions/2785266/0-1-bei-bao-cong-ji-yi-hua-sou-suo-dao-d-ev76/?envType=study-plan-v2&envId=top-100-liked
 
-// 涉及0-1背包问题
+// 涉及背包问题（灵神的讲解 0-1、完全）
+// https://www.bilibili.com/video/BV16Y411v7Y6/
 
 // 重点关注
 // 416. 分割等和子集
@@ -25,6 +26,7 @@ public class LeetCode_416 {
     }
 
 
+    // 灵神：掌握。f[i] 表示是否可以找到一个子集，使得其元素之和等于 i。
     // 在计算 f[i+1] 时，只会用到 f[i]，不会用到比 i 更早的状态。
     public boolean canPartition(int[] nums) {
         int s = 0; // 数组总和
@@ -34,14 +36,22 @@ public class LeetCode_416 {
         if (s % 2 != 0) { // 总和不是偶数，即不能对半分
             return false;
         }
-        s /= 2; // 注意这里把 s 减半了
-        boolean[] f = new boolean[s + 1];
-        f[0] = true;
+        s /= 2; // 注意这里把 总和s 减半了
+        boolean[] f = new boolean[s + 1]; // f[i] 表示是否可以找到一个子集，使得其元素之和等于 i。
+        f[0] = true; // 不选任何元素，所以为true
         int s2 = 0;
-        for (int x : nums) {
+        for (int x : nums) { // 对于每一个元素
+            // 更新 s2，表示当前考虑过的元素的最大和，但不超过目标和 s
             s2 = Math.min(s2 + x, s);
-            for (int j = s2; j >= x; j--) {
+            // 从 s2 开始，向下遍历到 x
+            // 这是因为我们要确保在考虑当前元素 x 时，计算出的新的子集和不超过 s
+            // 同时避免重复计算更小的和
+            for (int j = s2; j >= x; j--) { // f[j]在[s2,s2+x]之中
+                // 更新 dp 数组：如果存在一个子集和为 j - x，
+                // 那么在加上 x 之后，就会有一个子集和为 j
                 f[j] = f[j] || f[j - x];
+                // dp[j] = true 表示存在一个子集和为 j
+                // 这个子集和是通过之前存在的一个子集和 (j - x) 加上当前元素 x 得到的
             }
         }
         return f[s];
