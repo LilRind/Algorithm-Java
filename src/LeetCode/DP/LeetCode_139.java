@@ -4,12 +4,39 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/*
+输入: s = "leetcode", wordDict = ["leet", "code"]
+输出: true
+解释: 返回 true 因为 "leetcode" 可以由 "leet" 和 "code" 拼接成。
+
+输入: s = "applepenapple", wordDict = ["apple", "pen"]
+输出: true
+解释: 返回 true 因为 "applepenapple" 可以由 "apple" "pen" "apple" 拼接成。
+     注意，你可以重复使用字典中的单词。
+
+输入: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
+输出: false
+ */
+
+// 重点关注
+// 139. 单词拆分
 public class LeetCode_139 {
     public static void main(String[] args) {
-        String s = "leetcode";
+        // 示例1
+        String s1 = "leetcode";
         List<String> dict1 = Arrays.asList("leet", "code");
 
-        System.out.println(wordBreak(s, dict1));
+        System.out.println(wordBreak(s1, dict1));
+        // 示例2
+        String s2 = "applepenapple";
+        List<String> dict2 = Arrays.asList("apple", "pen");
+
+        System.out.println(wordBreak(s2, dict2));
+        // 示例3
+        String s3 = "catsandog";
+        List<String> dict3 = Arrays.asList("cats", "dog", "sand", "and", "cat");
+
+        System.out.println(wordBreak(s3, dict3));
     }
 
     // 提交代码示例：掌握。
@@ -33,7 +60,7 @@ public class LeetCode_139 {
         return dp[n];
     }
 
-    // 官方：dp
+    // 官方：dp。比较慢
     /*
     public boolean wordBreak(String s, List<String> wordDict) {
         Set<String> wordDictSet = new HashSet(wordDict);
@@ -49,10 +76,9 @@ public class LeetCode_139 {
         }
         return dp[s.length()];
     }
-
      */
 
-    // 第一次未解出。但思路是和提交代码示例几乎一致
+    // 第一次未解出。但思路是和“提交代码示例”几乎一致
     /*
     public static boolean wordBreak(String s, List<String> wordDict) {
         // dp[i] 代表第i位可以拼出，即1代表可以拼出，0代表不能

@@ -21,6 +21,9 @@ import java.util.Scanner;
 输出: 1
 
  */
+
+// 重点关注
+// 152. 乘积最大子数组
 public class LeetCode_152 {
 
     public static void main(String[] args) {
@@ -45,7 +48,7 @@ public class LeetCode_152 {
          */
     }
 
-    //
+    // 再写，第一次写更改后
     public static int maxProduct(int[] nums) {
         int res = nums[0]; // 确保返回的结果至少是nums中的单个元素
         int ans = 1; // 保留每个连续非空连续子数组的乘积

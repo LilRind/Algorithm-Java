@@ -20,7 +20,6 @@ import java.util.Scanner;
 // LeetCode 300. 最长递增子序列
 // https://leetcode.cn/problems/longest-increasing-subsequence/description/
 
-// 核心思想是遍历元素，如果后一个元素大于序列末尾元素，则加入末尾，如果后一个元素小于序列末尾元素，则覆盖序列中对应的位置
 public class LeetCode_300 {
 
     public static void main(String[] args) {
@@ -95,10 +94,10 @@ public class LeetCode_300 {
         }
         return res;
     }
-
      */
 
 
+    // 解法：核心思想是遍历元素，如果后一个元素大于序列末尾元素，则加入末尾，如果后一个元素小于序列末尾元素，则覆盖序列中对应的位置
     // 之前写的，计算最长递增子序列的长度
     /*
     static final int N = 2510;
