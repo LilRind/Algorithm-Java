@@ -10,7 +10,7 @@ package LeetCode.DP;
 解释：13 = 4 + 9
  */
 
-// 官方：dp、数学
+// 官方：dp（掌握）、数学
 // https://leetcode.cn/problems/perfect-squares/solutions/822940/wan-quan-ping-fang-shu-by-leetcode-solut-t99c/?envType=study-plan-v2&envId=top-100-liked
 
 // 重点关注

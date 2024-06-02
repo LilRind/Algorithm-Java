@@ -2,10 +2,22 @@ package LeetCode.DP;
 
 import java.util.Arrays;
 
+/*
+输入：coins = [1, 2, 5], amount = 11
+输出：3
+解释：11 = 5 + 5 + 1
+
+输入：coins = [2], amount = 3
+输出：-1
+
+输入：coins = [1], amount = 0
+输出：0
+ */
 
 // sugar：dp、记忆化搜索、递归(超时不推荐)
 // https://leetcode.cn/problems/coin-change/solutions/137661/javadi-gui-ji-yi-hua-sou-suo-dong-tai-gui-hua-by-s/?envType=study-plan-v2&envId=top-100-liked
 
+// 重点关注
 // 零钱兑换
 public class LeetCode_322 {
     public static void main(String[] args) {
@@ -15,8 +27,8 @@ public class LeetCode_322 {
     }
 
 
-    // Sugar：
-    public int coinChange(int[] coins, int amount) {
+    // Sugar：与官方类似
+    public static int coinChange(int[] coins, int amount) {
         // dp[n]的值： 表示的凑成总金额为n所需的最少的硬币个数
         int[] dp = new int[amount+1];
         // 给dp赋初值，最多的硬币数就是全部使用面值1的硬币进行换
