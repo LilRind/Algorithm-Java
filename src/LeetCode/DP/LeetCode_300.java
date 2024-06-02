@@ -22,8 +22,6 @@ import java.util.Scanner;
 
 // 核心思想是遍历元素，如果后一个元素大于序列末尾元素，则加入末尾，如果后一个元素小于序列末尾元素，则覆盖序列中对应的位置
 public class LeetCode_300 {
-    static final int N = 2510;
-    static int n, nums[] = new int[N], f[] = new int[N];
 
     public static void main(String[] args) {
         int[] num1 = {10, 9, 2, 5, 3, 7, 101, 18};
@@ -103,6 +101,10 @@ public class LeetCode_300 {
 
     // 之前写的，计算最长递增子序列的长度
     /*
+    static final int N = 2510;
+
+    static int n, nums[] = new int[N], f[] = new int[N];
+
     public static int lengthOfLIS(int[] nums, int n) {
         List<Integer> v = new ArrayList<>();  // 创建一个ArrayList用于存储递增子序列的元素
 
