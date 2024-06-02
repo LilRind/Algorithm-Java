@@ -6,6 +6,7 @@ import java.util.Map;
 // LinkedHashMap 实现 LRU
 // https://blog.csdn.net/m0_56602092/article/details/130427065?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-130427065-blog-104914473.235^v43^pc_blog_bottom_relevance_base1&spm=1001.2101.3001.4242.1&utm_relevant_index=1
 
+// 重点关注
 // 146. LRU 缓存
 // https://leetcode.cn/problems/lru-cache/description/?envType=study-plan-v2&envId=top-100-liked
 public class LeetCode_146 {
@@ -39,7 +40,7 @@ public class LeetCode_146 {
 
 // 笔试可以这样写，快捷方便
 class LRUCache extends LinkedHashMap<Integer, Integer> {
-    private int capacity;
+    private int capacity; // 容量
 
     public LRUCache(int capacity) {
         // accessOrder来决定按哪种顺序排序，默认无参构造器为false。设置为true，被访问的元素会被移动到链表尾部，put和get等方法都表示访问。
@@ -47,18 +48,20 @@ class LRUCache extends LinkedHashMap<Integer, Integer> {
         this.capacity = capacity;
     }
 
+    // 找不到返回默认值-1
     public int get(int key) {
         return super.getOrDefault(key, -1);
+    }
+
+    // 当size() > capacity，则淘汰策略开启
+    @Override
+    protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
+        return size() > capacity;
     }
 
     // 这个可不写
     public void put(int key, int value) {
         super.put(key, value);
-    }
-
-    @Override
-    protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
-        return size() > capacity;
     }
 }
 
