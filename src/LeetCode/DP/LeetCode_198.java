@@ -20,6 +20,7 @@ import java.util.Scanner;
 // K神：掌握。空复O（1）
 // https://leetcode.cn/problems/house-robber/solutions/28242/da-jia-jie-she-dong-tai-gui-hua-jie-gou-hua-si-lu-/?envType=study-plan-v2&envId=top-100-liked
 
+// 重点关注
 // 打家劫舍
 // https://leetcode.cn/problems/house-robber/description/
 public class LeetCode_198 {
