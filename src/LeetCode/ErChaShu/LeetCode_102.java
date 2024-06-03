@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-
-import static LeetCode.ErChaShu.DFS.LeetCode_111.dfs;
 /*
 输入：root = [3,9,20,null,null,15,7]
 输出：[[3],[9,20],[15,7]]

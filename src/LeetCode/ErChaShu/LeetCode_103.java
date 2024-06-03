@@ -1,4 +1,4 @@
-package LeetCode.ErChaShu.BFS;
+package LeetCode.ErChaShu;
 
 import LeetCode.ErChaShu.TreeNode.TreeNode;
 

@@ -51,12 +51,27 @@ public class LeetCode_199 {
 
         System.out.println(rightSideView(b).toString());
 
-
-
     }
 
 
+    // 第二次未解出。思考下原题目给的返回类型，高度 == 列表长度
+    public static List<Integer> rightSideView(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        dfs(root, 0, list);
+        return list;
+    }
+
+    public static void dfs(TreeNode root, int h, List<Integer> ans){
+        if(root == null) return;
+        if(h == ans.size()){
+            ans.add(root.val);
+        }
+        dfs(root.right, h+1, ans);
+        dfs(root.left, h+1, ans);
+    }
+
     // 第一次做，思路是bfs + 队列优先遍历右子节点，成功了
+        /*
     public static List<Integer> rightSideView(TreeNode root) {
         List<Integer> res = new ArrayList<>(); // 返回结果
         if(root == null){
@@ -82,6 +97,7 @@ public class LeetCode_199 {
         }
         return res;
     }
+         */
 
     // 灵神：先递归右子树，再递归左子树，当某个深度首次到达时，对应的节点就在右视图中
     /*

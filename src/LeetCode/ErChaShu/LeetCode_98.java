@@ -34,6 +34,26 @@ public class LeetCode_98 {
         System.out.println(isValidBST(b)); // false
     }
 
+    // 第二次未解出。
+    public static boolean isValidBST(TreeNode root) {
+        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    public static boolean isValidBST(TreeNode root, long low, long up){
+        if(root == null){
+            return true;
+        }
+        if(root.val <= low || root.val >= up){
+            return false;
+        }
+        return isValidBST(root.left, low, root.val) && isValidBST(root.right, root.val, up);
+    }
+
+
+
+
+    // 第一次写
+    /*
     public static boolean isValidBST(TreeNode root) {
         return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
@@ -51,6 +71,7 @@ public class LeetCode_98 {
         // 返回左节点是否小于父节点的值，并且右节点是否大于左节点的值
         return isValidBST(node.left, lower, node.val) && isValidBST(node.right, node.val, upper);
     }
+     */
 
     // 中序遍历
     /*

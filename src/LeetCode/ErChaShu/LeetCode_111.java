@@ -1,4 +1,4 @@
-package LeetCode.ErChaShu.DFS;
+package LeetCode.ErChaShu;
 
 
 // 好久没看了BFS，没思路
