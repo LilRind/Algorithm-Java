@@ -16,6 +16,9 @@ public class LeetCode_33 {
 
     }
 
+    // 第二次未解出
+
+
     // 第一次未解出，再写一遍
     public int search(int[] nums, int target) {
         int l = 0, r = nums.length - 1;
@@ -24,7 +27,7 @@ public class LeetCode_33 {
             int mid = l + (r - l)/2;
             if (nums[mid] == target) { // mid即为所求索引
                 return mid;
-            }else if(nums[mid] >= nums[l]){ // mid左边是升序序列，注意当列表长度<=2位时，产生mid=l的情况。
+            }else if(nums[mid] >= nums[0]){ // mid左边是升序序列，注意当列表长度<=2位时，产生mid=l的情况。
                 if(target >= nums[l] && target < nums[mid]){ // target在mid左边序列中
                     r = mid - 1;
                 }else { // target不在mid左边，l移到mid右一位
