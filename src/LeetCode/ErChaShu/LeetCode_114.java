@@ -42,7 +42,28 @@ public class LeetCode_114 {
         printDfs(b);
     }
 
-    // 官方方法一：递归前序遍历，，掌握
+    // 第二次未解出。递归前序遍历 + List修改链表连接
+    public static void flatten(TreeNode root) {
+        List<TreeNode> list = new ArrayList();
+        pre(root, list);
+        for (int i = 1; i < list.size(); i++) {
+            TreeNode tempMid = list.get(i-1), tempL = list.get(i);
+            tempMid.right = tempL;
+            tempMid.left = null;
+        }
+
+    }
+
+    public static void pre(TreeNode root, List<TreeNode> list){
+        if(root == null) return;
+        list.add(root);
+        pre(root.left, list);
+        pre(root.right, list);
+    }
+
+
+    // 官方方法一：递归前序遍历，掌握
+    /*
     public static void flatten(TreeNode root) {
         List<TreeNode> list = new ArrayList<TreeNode>();
         preorderTraversal(root, list); // 前序遍历得到前序List

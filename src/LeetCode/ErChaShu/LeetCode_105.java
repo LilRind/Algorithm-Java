@@ -19,6 +19,8 @@ public class LeetCode_105 {
 
     }
 
+
+    // 第二次未解出。分治，掌握
     static HashMap<Integer, Integer> dic = new HashMap<>();
     public static TreeNode buildTree(int[] preorder, int[] inorder) {
         for(int i = 0; i < inorder.length; i++) // 保存中序列表中节点的索引
@@ -40,7 +42,6 @@ public class LeetCode_105 {
 
     // K神，分治，掌握
     /*
-class Solution {
     int[] preorder;
     HashMap<Integer, Integer> dic = new HashMap<>();
     public TreeNode buildTree(int[] preorder, int[] inorder) {
@@ -61,7 +62,6 @@ class Solution {
         node.right = recur(root + i - left + 1, i + 1, right); // 开启右子树递归
         return node;                                           // 回溯返回根节点
     }
-}
      */
 
     // 这个方法是 StefanPochmann 大神的方法，如果能理解更好
@@ -71,29 +71,29 @@ class Solution {
     }
     int pre = 0;
     int in = 0;
-private TreeNode buildTreeHelper(int[] preorder, int[] inorder, long stop) {
-    //到达末尾返回 null
-    if(pre == preorder.length){
-        return null;
+    private TreeNode buildTreeHelper(int[] preorder, int[] inorder, long stop) {
+        //到达末尾返回 null
+        if(pre == preorder.length){
+            return null;
+        }
+        //到达停止点返回 null
+        //当前停止点已经用了，in 后移
+        if (inorder[in] == stop) {
+            in++;
+            return null;
+        }
+        int root_val = preorder[pre++];
+        TreeNode root = new TreeNode(root_val);
+        //左子树的停止点是当前的根节点
+        root.left = buildTreeHelper(preorder,  inorder, root_val);
+        //右子树的停止点是当前树的停止点
+        root.right = buildTreeHelper(preorder, inorder, stop);
+        return root;
     }
-    //到达停止点返回 null
-    //当前停止点已经用了，in 后移
-    if (inorder[in] == stop) {
-        in++;
-        return null;
-    }
-    int root_val = preorder[pre++];
-    TreeNode root = new TreeNode(root_val);
-    //左子树的停止点是当前的根节点
-    root.left = buildTreeHelper(preorder,  inorder, root_val);
-    //右子树的停止点是当前树的停止点
-    root.right = buildTreeHelper(preorder, inorder, stop);
-    return root;
-}
      */
 
 
-    // 方法一：递归、直观
+    // 官方方法一：递归、直观
     /*
     private static Map<Integer, Integer> indexMap;
 
@@ -157,31 +157,6 @@ private TreeNode buildTreeHelper(int[] preorder, int[] inorder, long stop) {
             }
         }
         return root;
-    }
-     */
-
-    // K神，分治
-    /*
-    class Solution {
-    int[] preorder;
-    HashMap<Integer, Integer> dic = new HashMap<>();
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
-        this.preorder = preorder;
-        for(int i = 0; i < inorder.length; i++)
-            dic.put(inorder[i], i);
-        return recur(0, 0, inorder.length - 1);
-    }
-    // 节点在前序列表中的索引，中序列表左边界，中序列表有边界
-    TreeNode recur(int root, int left, int right) {
-        if (left > right) return null;                          // 递归终止
-        TreeNode node = new TreeNode(preorder[root]);          // 建立根节点
-        // 前序列表中的节点在中序列表中的索引
-        int i = dic.get(preorder[root]);                       // 划分根节点、左子树、右子树
-        node.left = recur(root + 1, left, i - 1);              // 开启左子树递归
-        // 右子树根节点的前序索引为 `i - left + root + 1`
-        // `i - left + root + 1` 含义为 `根节点索引 + 左子树长度(i - left) + 1`
-        node.right = recur(root + i - left + 1, i + 1, right); // 开启右子树递归
-        return node;                                           // 回溯返回根节点
     }
      */
 
