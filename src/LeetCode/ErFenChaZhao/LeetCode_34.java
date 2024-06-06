@@ -1,28 +1,45 @@
 package LeetCode.ErFenChaZhao;
 
+/*
+输入：nums = [5,7,7,8,8,10], target = 8
+输出：[3,4]
+
+输入：nums = [5,7,7,8,8,10], target = 6
+输出：[-1,-1]
+
+输入：nums = [], target = 0
+输出：[-1,-1]
+ */
+
 // labuladong：很详细，一步一步教你如何学会二分搜索-模板
 // https://labuladong.online/algo/essential-technique/binary-search-framework-2/#%E5%9B%9B%E3%80%81%E9%80%BB%E8%BE%91%E7%BB%9F%E4%B8%80
 
 // 灵神：
 // https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/solutions/1980196/er-fen-cha-zhao-zong-shi-xie-bu-dui-yi-g-t9l9/?envType=study-plan-v2&envId=top-100-liked
 
+import java.util.Arrays;
+
 // 重点关注
-//
+// 34. 在排序数组中查找元素的第一个和最后一个位置
 public class LeetCode_34 {
     public static void main(String[] args) {
         int[] a1 = new int[]{5,7,7,8,8,10};
+        System.out.println(Arrays.toString(searchRange(a1, 8)));
+
+        int[] b1 = new int[]{5,7,7,8,8,10};
+        System.out.println(Arrays.toString(searchRange(a1, 6)));
 
     }
 
     // 第一次未解出。掌握
     // labuladong
-    public int[] searchRange(int[] nums, int target) {
+    public static int[] searchRange(int[] nums, int target) {
         int l = left_bound(nums, target);
         int r = right_bound(nums, target);
         return new int[]{l, r};
     }
 
-    int left_bound(int[] nums, int target) {
+    static int left_bound(int[] nums, int target) {
         int left = 0, right = nums.length - 1;
         while (left <= right) {
             int mid = left + (right - left) / 2;
@@ -43,7 +60,7 @@ public class LeetCode_34 {
         return nums[left] == target ? left : -1;
     }
 
-    int right_bound(int[] nums, int target) {
+    static int right_bound(int[] nums, int target) {
         int left = 0, right = nums.length - 1;
         while (left <= right) {
             int mid = left + (right - left) / 2;
