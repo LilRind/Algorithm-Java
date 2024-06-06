@@ -23,6 +23,7 @@ package LeetCode.ErFenChaZhao;
 // 搜索旋转排序数组【基础算法精讲 05】
 // https://www.bilibili.com/video/BV1QK411d76w/?vd_source=cd981fb854a559572119bac96c0726bf
 
+// 最基础的二分查找
 // 35. 搜索插入位置
 public class LeetCode_35 {
     public static void main(String[] args) {
@@ -36,6 +37,25 @@ public class LeetCode_35 {
         System.out.println(searchInsert(nums, tC));
     }
 
+    // 第二次解出
+    /*
+    public int searchInsert(int[] nums, int target) {
+        int l = 0, r = nums.length;
+        // 左闭右开
+        while(l < r){
+            int mid = l + (r - l)/2;
+            if (nums[mid] >= target){
+                r = mid;
+            }else{
+                l = mid + 1;
+            }
+        }
+        return l;
+    }
+     */
+
+
+    // 第一次
     public static int searchInsert(int[] nums, int target) {
         int l = 0, r = nums.length;
         // 左闭右开写法，返回值取left
