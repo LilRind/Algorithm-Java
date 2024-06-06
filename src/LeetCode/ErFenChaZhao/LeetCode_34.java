@@ -28,7 +28,6 @@ public class LeetCode_34 {
 
         int[] b1 = new int[]{5,7,7,8,8,10};
         System.out.println(Arrays.toString(searchRange(a1, 6)));
-
     }
 
     // 第一次未解出。掌握
