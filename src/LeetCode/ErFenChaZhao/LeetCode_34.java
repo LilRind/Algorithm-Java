@@ -40,8 +40,8 @@ public class LeetCode_34 {
     }
 
     static int left_bound(int[] nums, int target) {
-        int left = 0, right = nums.length - 1;
-        while (left <= right) {
+        int left = 0, right = nums.length - 1; // 注意右边界
+        while (left <= right) { // 左闭右闭
             int mid = left + (right - left) / 2;
             if (nums[mid] < target) {
                 left = mid + 1;
@@ -61,8 +61,8 @@ public class LeetCode_34 {
     }
 
     static int right_bound(int[] nums, int target) {
-        int left = 0, right = nums.length - 1;
-        while (left <= right) {
+        int left = 0, right = nums.length - 1; // 注意右边界
+        while (left <= right) { // 左闭右闭
             int mid = left + (right - left) / 2;
             if (nums[mid] < target) {
                 left = mid + 1;
