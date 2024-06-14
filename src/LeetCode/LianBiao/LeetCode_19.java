@@ -2,6 +2,8 @@ package LeetCode.LianBiao;
 
 import LeetCode.LianBiao.ListNode.ListNode;
 
+import java.util.List;
+
 import static LeetCode.LianBiao.ListNode.ListNode.printNodes;
 
 // 19. 删除链表的倒数第 N 个结点
@@ -37,6 +39,33 @@ public class LeetCode_19 {
         ListNode tempNode3 = removeNthFromEnd(c, 1);
         printNodes(tempNode3);
     }
+
+    // 第3次写。成功解出
+    public static ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dum = new ListNode();
+        dum.next = head;
+
+        ListNode s = dum, f = head;
+        while (n-- > 0){
+            f = f.next;
+        }
+
+        while (f != null){
+            s = s.next;
+            f = f.next;
+        }
+
+        s.next = s.next.next;
+        /* 将被删除的节点的next置为null
+        ListNode delNext = s.next.next;
+        s.next.next = null; // 可以不需要这一步
+        s.next = delNext;
+         */
+
+        return dum.next;
+    }
+
+
 
     // 第二次写，部分示例通过，再思考再写一遍
     /*
@@ -76,21 +105,21 @@ public class LeetCode_19 {
 
 
     // 第一次写，官方的写法
-    public static ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode dummy = new ListNode(0, head); // 虚拟节点
-        ListNode first = head; // 后指针
-        ListNode second = dummy; // 前指针
-        for (int i = 0; i < n; ++i) {
-            first = first.next;
-        }
-        while (first != null) {
-            first = first.next;
-            second = second.next;
-        }
-        second.next = second.next.next; // 删除了间隔的节点，但是间隔的节点.next指向没有删除
-        ListNode ans = dummy.next;
-        return ans;
-    }
+//    public static ListNode removeNthFromEnd(ListNode head, int n) {
+//        ListNode dummy = new ListNode(0, head); // 虚拟节点
+//        ListNode first = head; // 后指针
+//        ListNode second = dummy; // 前指针
+//        for (int i = 0; i < n; ++i) {
+//            first = first.next;
+//        }
+//        while (first != null) {
+//            first = first.next;
+//            second = second.next;
+//        }
+//        second.next = second.next.next; // 删除了间隔的节点，但是间隔的节点.next指向没有删除
+//        ListNode ans = dummy.next;
+//        return ans;
+//    }
 
 
     // 第一次做法，成功是成功了，但是代码太多了
