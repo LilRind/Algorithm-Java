@@ -24,6 +24,18 @@ public class LeetCode_206 {
         ListNode head = reverseList(node1);
         printNodes(head);
     }
+    // 第3次做，通过。
+    public static ListNode reverseList(ListNode head) {
+        ListNode dum = null;
+        while (head != null){
+            ListNode tempNext = head.next;
+            head.next = dum;
+            dum = head;
+            head = tempNext;
+        }
+        return dum;
+    }
+
 
     // 第二次做，通过
     /*
@@ -41,15 +53,15 @@ public class LeetCode_206 {
     */
 
     // 第一次做
-    public static ListNode reverseList(ListNode head) {
-        ListNode pre = null; // 注意是null
-        while(head != null){
-            ListNode temp = head.next;
-            head.next = pre;
-            pre = head;
-            head = temp;
-        }
-        return pre;
-    }
+//    public static ListNode reverseList(ListNode head) {
+//        ListNode pre = null; // 注意是null
+//        while(head != null){
+//            ListNode temp = head.next;
+//            head.next = pre;
+//            pre = head;
+//            head = temp;
+//        }
+//        return pre;
+//    }
 
 }

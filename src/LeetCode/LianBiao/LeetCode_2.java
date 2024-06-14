@@ -47,7 +47,7 @@ public class LeetCode_2 {
 
     }
 
-    // 第3次做，
+    // 第3次做，迭代，通过
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode dummyNode = new ListNode(); // 虚拟节点
         ListNode h = dummyNode;
@@ -60,10 +60,10 @@ public class LeetCode_2 {
             if(l2 != null){
                 carry += l2.val;
             }
-            ListNode temp = new ListNode(carry % 10);
-            carry /= 10;
-            dummyNode.next = temp;
-            dummyNode = dummyNode.next;
+            ListNode temp = new ListNode(carry % 10); // 钩爪当前节点
+            carry /= 10; // 得到进位
+            dummyNode.next = temp; // 连接该节点
+            dummyNode = dummyNode.next; // 指针指向下一位
             if(l1 != null) l1 = l1.next; // 如果l1有节点，指向下一位
             if(l2 != null) l2 = l2.next; // 如果l2有节点，指向下一位
         }
