@@ -52,7 +52,7 @@ public class LeetCode_138 {
 
     }
 
-    // 第2次做
+    // 第2次做。个人认为这种更像是 “递归 + 哈希表”
     // 输入旧节点，返回新节点
     public static Node copyRandomList(Node head) {
         if(head == null){ // 递归终止条件

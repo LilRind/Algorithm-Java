@@ -36,7 +36,6 @@ public class LeetCode_206 {
         return dum;
     }
 
-
     // 第二次做，通过
     /*
     public static ListNode reverseList(ListNode head) {
