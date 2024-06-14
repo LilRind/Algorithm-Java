@@ -8,6 +8,8 @@ import static LeetCode.LianBiao.ListNode.ListNode.printNodes;
 
 // https://leetcode.cn/problems/add-two-numbers/  （1.递归 2.迭代）
 
+// 灵神：1.递归 2.迭代（掌握）
+//https://leetcode.cn/problems/add-two-numbers/solutions/2327008/dong-hua-jian-ji-xie-fa-cong-di-gui-dao-oe0di/?envType=study-plan-v2&envId=top-100-liked
 
 // 两数相加-链表
 /*
@@ -45,6 +47,30 @@ public class LeetCode_2 {
 
     }
 
+    // 第3次做，
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummyNode = new ListNode(); // 虚拟节点
+        ListNode h = dummyNode;
+        int carry = 0;
+
+        while(l1 != null || l2 != null || carry != 0){
+            if(l1 != null){
+                carry += l1.val;
+            }
+            if(l2 != null){
+                carry += l2.val;
+            }
+            ListNode temp = new ListNode(carry % 10);
+            carry /= 10;
+            dummyNode.next = temp;
+            dummyNode = dummyNode.next;
+            if(l1 != null) l1 = l1.next; // 如果l1有节点，指向下一位
+            if(l2 != null) l2 = l2.next; // 如果l2有节点，指向下一位
+        }
+        return h.next;
+    }
+
+
     // 第二次做，仍然不能通过不同链表长度的情况，再重写
     /*
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
@@ -65,7 +91,9 @@ public class LeetCode_2 {
         return dummyNode.next;
     }
      */
-    // 再写，迭代
+
+    // 掌握。再写，迭代
+    /*
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode dummyNode = new ListNode(); // 虚拟节点
         ListNode h = dummyNode;
@@ -89,6 +117,7 @@ public class LeetCode_2 {
         }
         return dummyNode.next; // 返回头节点
     }
+    */
 
 
     // 第一次未解出，官方解法，模拟的做法相比之下有点复杂

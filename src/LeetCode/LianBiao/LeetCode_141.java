@@ -36,7 +36,7 @@ public class LeetCode_141 {
     }
      */
 
-    // 再写，增添条件：考虑fast != null
+    // 第一次再写，增添条件：考虑fast != null
     public boolean hasCycle(ListNode head) {
         ListNode slow = head, fast = head; // 乌龟和兔子同时从起点出发
         // 检测当前fast是否为空，因为fast.next不为空时，fast.next.next可能为null，一旦fast = null 则不能后移，即结束。
