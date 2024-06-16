@@ -40,26 +40,74 @@ public class LeetCode_24 {
 
     }
 
-    // 迭代
+
+    // 第3次未解出，差一点点解出。
     public static ListNode swapPairs(ListNode head) {
-        // 创建虚拟节点，next指向head
-        ListNode dummyHead = new ListNode(0);
-        dummyHead.next = head;
-        ListNode temp = dummyHead;
-        // 如果没有后两个节点，则提前结束
-        while (temp.next != null && temp.next.next != null) {
-            // 创建两个临时节点
-            ListNode node1 = temp.next;
-            ListNode node2 = temp.next.next;
-            // 交换temp后两个节点
-            temp.next = node2;
-            node1.next = node2.next;
-            node2.next = node1;
-            // temp节点后移动两个节点
-            temp = node1;
+        ListNode res = new ListNode();
+        res.next = head;
+        ListNode cur = res; // cur节点代表要交换的两个节点的前一个节点，即cur.next = first, first.next = second。
+
+        while(cur.next != null && cur.next.next != null){
+            ListNode first = cur.next;
+            ListNode second = cur.next.next;
+            // 交换节点，注意交换之后，当前节点cur要移动
+            first.next = second.next;
+            second.next  = first;
+            cur.next = second;
+            cur = first;
         }
-        return dummyHead.next;
+        return res.next;
     }
+
+
+    // 第2次未解出
+//    public static ListNode swapPairs(ListNode head) {
+//        ListNode dum = new ListNode();
+//        dum.next = head;
+//        ListNode cur = dum;
+//
+//        while (cur.next != null && cur.next.next != null){
+//            ListNode node1 = cur.next;
+//            ListNode node2 = cur.next.next;
+//            //
+//            cur.next = node2;
+//            node1.next = node2.next;
+//            node2.next = node1;
+//            cur = node1;
+//        }
+//        return dum.next;
+//    }
+
+
+
+
+
+
+
+
+
+
+
+    // 迭代
+//    public static ListNode swapPairs(ListNode head) {
+//        // 创建虚拟节点，next指向head
+//        ListNode dummyHead = new ListNode(0);
+//        dummyHead.next = head;
+//        ListNode temp = dummyHead;
+//        // 如果没有后两个节点，则提前结束
+//        while (temp.next != null && temp.next.next != null) {
+//            // 创建两个临时节点
+//            ListNode node1 = temp.next;
+//            ListNode node2 = temp.next.next;
+//            // 交换temp后两个节点
+//            temp.next = node2;
+//            node1.next = node2.next;
+//            node2.next = node1;
+//            // temp节点后移动两个节点
+//            temp = node1;
+//        }
+//        return dummyHead.next;
+//    }
 
 
     /*

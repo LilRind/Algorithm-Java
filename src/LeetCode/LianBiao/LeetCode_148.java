@@ -29,7 +29,7 @@ import static LeetCode.LianBiao.ListNode.ListNode.printNodes;
 输入：head = []
 输出：[]
  */
-// 第一次未解出，重点关注
+// 第1次未解出，重点关注
 public class LeetCode_148 {
     public static void main(String[] args) {
         ListNode a = new ListNode(4);
