@@ -10,32 +10,61 @@ package LeetCode.ShuangZhiZhen;
 // 11. 盛最多水的容器
 public class LeetCode_11 {
     public static void main(String[] args) {
+        // 示例1
+        int[] h = new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7};
+        System.out.println(maxArea(h));
+        // 示例2
+        int[] h2 = new int[]{1, 1};
+        System.out.println(maxArea(h2));
 
     }
+
+    // 第2次未解出
+    public static int maxArea(int[] height) {
+        int n = height.length;
+        int l = 0, r = n - 1; // 记录双指针
+        int res = 0; // 返回值
+
+        while(l < r){ // l == r 遍历结束
+            int h = Math.min(height[l], height[r]); //
+            int temp = h * (r - l);
+            res = Math.max(res, temp);
+            while(l < r && height[l] <= h){ // (l < n && height[l] <= h) 都可以
+                l++;
+            }
+            while(r >= 0 && height[r] <= h){
+                r--;
+            }
+
+        }
+        return res;
+    }
+
+
 
     // 掌握，O(N)
     // 再写，核心思想是，一开始 l指向数组首位，r指向数组末位，
-    // 我们记录容器的最小高度h，只有当我们找到height[x] > h，才有可能更新max值，
+    // 我们记录容器的最小高度h（l，r中的较小值），计算出当前的体积tempV，只有当我们找到height[x] > h，才有可能更新max值，
     // 因为底(r - l)是在变小的，只有当height[x]变大，才有可能大于原先的max值
-    public int maxArea(int[] height) {
-        int n = height.length;
-        int l = 0, r = n - 1; // l指向数组首位，r指向数组末位
-        int resMax = 0;
-        while (l < r){
-            int h = Math.min(height[l], height[r]); // 记录容器的最小高度h
-            int tempV = h * (r - l);
-            resMax = Math.max(resMax, tempV);
-            // 如果height[l] <= h最小高度，则指针右移，直到找到大于h的索引
-            while (l < n && height[l] <= h){
-                l++;
-            }
-            // 如果height[l] <= h最小高度，则指针左移，直到找到大于h的索引
-            while (r >= 0 && height[r] <= h){
-                r--;
-            }
-        }
-        return resMax;
-    }
+//    public int maxArea(int[] height) {
+//        int n = height.length;
+//        int l = 0, r = n - 1; // l指向数组首位，r指向数组末位
+//        int resMax = 0;
+//        while (l < r){
+//            int h = Math.min(height[l], height[r]); // 记录容器的最小高度h
+//            int tempV = h * (r - l);
+//            resMax = Math.max(resMax, tempV);
+//            // 如果height[l] <= h最小高度，则指针右移，直到找到大于h的索引
+//            while (l < n && height[l] <= h){
+//                l++;
+//            }
+//            // 如果height[l] <= h最小高度，则指针左移，直到找到大于h的索引
+//            while (r >= 0 && height[r] <= h){
+//                r--;
+//            }
+//        }
+//        return resMax;
+//    }
 
     // 第一次未解出，逻辑是对的，但是会超时O(N^2)
     /*

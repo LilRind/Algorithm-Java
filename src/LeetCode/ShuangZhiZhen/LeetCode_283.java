@@ -26,24 +26,67 @@ public class LeetCode_283 {
         System.out.println(Arrays.toString(nums));
 
     }
-
-    // 掌握：一次遍历优化版。
+    //  掌握：1次遍历优化版。
     public static void moveZeroes(int[] nums)  {
-        int length;
-        if (nums == null || (length = nums.length) == 0) {
-            return;
-        }
-        int j = 0;
-        for (int i = 0; i < length; i++) {
-            if (nums[i] != 0) { // 找到非0元素
-                if (i > j) { // 避免数组开头是非零元素的交换也就是阻止（i==j）时交换
-                    nums[j] = nums[i]; // 此时nums[j] == 0
-                    nums[i] = 0;
+        int l = 0, n = nums.length;
+        for(int r = 0; r < n; r++){
+            if(nums[r] != 0){
+                if(r > l){
+                    nums[l] = nums[r];
+                    nums[r] = 0;
                 }
-                j++; // j指针后移动
+                l++;
             }
         }
     }
+
+
+
+    // 掌握。第2次差点解出，数组越界判断
+//    public static void moveZeroes(int[] nums)  {
+//        int n = nums.length;
+//        int l = 0, r = 0; // l 指向0元素， r 指向非0元素
+//        while(l < n && r < n) {
+//            if (nums[l] == 0) {
+//                while (r < n-1 && nums[r] == 0) { // 确认 r 未越界并且不为 0
+//                    r++;
+//                }
+//                // 交换，nums[r]为非0元素，nums[l]为0元素
+//                int temp = nums[l];
+//                nums[l] = nums[r];
+//                nums[r] = temp;
+//            }
+//            l++; // 移动0元素指针
+//            r++; // 移动非0元素指针
+//        }
+        // 这种写法也可以，只不过要额外判断1次r是否越界
+//        int n = nums.length;
+//        int l = 0, r = 0;
+//        while(l < n && r < n){
+//            if(nums[l] == 0){
+//                while (r < n && nums[r] == 0){
+//                    r++;
+//                }
+//                // 确认 r 未越界
+//                if (r < n) {
+//                    int temp = nums[l];
+//                    nums[l] = nums[r];
+//                    nums[r] = temp;
+//                }
+//            }
+//            l++;
+//            r++;
+//        }
+//
+
+
+
+
+
+
+
+
+
 
     // 第一次未解出，指针边界条件有问题
     /*
