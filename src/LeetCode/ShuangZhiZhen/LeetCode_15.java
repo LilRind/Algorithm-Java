@@ -17,29 +17,44 @@ public class LeetCode_15 {
     public static void main(String[] args) {
 
     }
-    // 再写，
+
+    // 第2次未解出
+    /*
+    public List<List<Integer>> threeSum(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        Arrays.sort(nums); // 排序
+        int l = 0, r = nums.length - 1;
+        while(l + 1< r){
+            if(!map.containsKey)
+            map.put()
+        }
+    }
+     */
+    // 第2次，再写未解出
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
         int n = nums.length;
         List<List<Integer>> res = new ArrayList<>();
-
-        for (int i = 0; i < n - 2; i++) {
+        for(int i = 0; i < n - 2; i++){
             int x = nums[i];
-            if(i > 0 && x == nums[i-1]) continue; // 跳过重复结果
-            // 判断该组合的最大、最小索引与0的大小，跳过无效索引，只遍历该索引的最小结果<=0，最大结果>=0的索引
-            if(x + nums[i+1] + nums[i+2] > 0) break; // 该索引的最小结果大于0，该索引组合都大于0，跳出循环
-            if(x + nums[n-2] + nums[n-1] < 0) continue; // 该索引的最大结果小于0，该索引组合都小于0，跳到下一个循环
-            int l = i + 1, r = n - 1; // 记录左、右边界
-            while (l < r){
-                int sum = x + nums[l] + nums[r];
+            int j = i + 1, k = n - 1;
+            if (i > 0 && x == nums[i - 1]) continue; // 跳过重复数字
+            if(x + nums[k-1] + nums[k] < 0){
+                continue;
+            }
+            if(x + nums[i+1] + nums[i+2] > 0){
+                break;
+            }
+            while(j < k){
+                int sum = x + nums[j] + nums[k];
                 if(sum > 0){
-                    r--;
-                } else if (sum < 0) {
-                    l++;
-                }else {
-                    res.add(List.of(x, nums[l], nums[r]));
-                    for (++l; l < r && nums[l] == nums[l - 1]; ++l); // 跳过重复数字，这里最好是for循环，一行就可以
-                    for (--r; r > l && nums[r] == nums[r + 1]; --r); // 跳过重复数字
+                    k--;
+                }else if(sum < 0){
+                    j++;
+                }else{
+                    res.add(List.of(x, nums[j], nums[k]));
+                    for (++j; j < k && nums[j] == nums[j - 1]; ++j); // 提前++j，跳过重复数字
+                    for (--k; k > j && nums[k] == nums[k + 1]; --k); // 提前--k，跳过重复数字
                 }
             }
         }
