@@ -35,9 +35,9 @@ public class LeetCode_279 {
         int[] dp = new int[n+1];
         for(int i = 1; i <= n; i++){
             int temp = Integer.MAX_VALUE; // 对应f[n - j * j]，初始化为Integer最大值
-            // 限制在[1, 根号n]范围内找完全平方数
+            // 转移公式：f[n] = f[n - j * j] + j * j
             for(int j = 1; j * j <= i; j++){
-                // 从f[1]开始求，求f[2] 直到 f[n]。转移公式：f[n] = f[n - j * j] + j * j
+                // 从f[1]开始求，求f[2] 直到 f[n]。
                 temp = Math.min(temp, dp[i - j * j]);
             }
             // dp[i] = temp + 1(dp[i]对应f[n]，temp对应f[n - j * j]，1对应j * j)
