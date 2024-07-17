@@ -44,19 +44,32 @@ public class LeetCode_198 {
 
     }
 
-    // 再写：
+    // 第二次解出，但仍需要注意dp[a]与nums[b]的对应关系
+//    public static int rob(int[] nums) {
+//        /*
+//        如果dp[i]对应nums[i]，那么必然边界问题(i>=2)。
+//        所以应该让dp[i+2]对应nums[i]，那么i>=0。
+//        然而i最大为n-1，那么返回值为dp[n+1]，所以构造int[] dp = new int[n+2]，n为数组长度
+//        */
+//        int n = nums.length;
+//        // dp[n]代表第n个所能获取的最大金额，从1开始计数
+//        int[] dp = new int[n + 1];
+//        dp[1] = nums[0]; // 第1个位置的最大金额是nums[0]
+//        for (int i = 2; i <= n; i++) {
+//            dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i - 1]);
+//        }
+//        return dp[n]; // 返回第n个位置获取的最大金额。
+//    }
+
+    // 第二次解出：尝试用空间复杂度O(1)来解决，需要一定熟练度
     public static int rob(int[] nums) {
-        int n = nums.length;
-        /*
-        如果dp[i]对应nums[i]，那么必然边界问题(i>=2)。
-        所以应该让dp[i+2]对应nums[i]，那么i>=0。
-        然而i最大为n-1，那么返回值为dp[n+1]，所以构造int[] dp = new int[n+2]，n为数组长度
-        */
-        int[] dp = new int[n+2];
-        for (int i = 0; i < n; i++) {
-            dp[i+2] = Math.max(nums[i] + dp[i], dp[i+1]);
+        int pre1 = 0, pre2 = 0;
+        for(int i = 0; i < nums.length; i++){
+            int cur = Math.max(nums[i] + pre1, pre2);
+            pre1 = pre2;
+            pre2 = cur;
         }
-        return dp[n+1];
+        return pre2;
     }
 
     // 第一次未解出。注意把握dp[]与nums[]的位数关系
