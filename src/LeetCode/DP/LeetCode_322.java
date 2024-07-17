@@ -26,27 +26,44 @@ public class LeetCode_322 {
         System.out.println(coinChange(coins, amount));
     }
 
-
-    // Sugar：与官方类似
+    // 2
     public static int coinChange(int[] coins, int amount) {
-        // dp[n]的值： 表示的凑成总金额为n所需的最少的硬币个数
-        int[] dp = new int[amount+1];
-        // 给dp赋初值，最多的硬币数就是全部使用面值1的硬币进行换
-        // 标记。 amount + 1 是不可能达到的换取数量，于是使用其进行填充
-        Arrays.fill(dp,amount+1);
-        dp[0] = 0; // 金额为0，dp也为0
-        for(int i = 1; i <= amount;i++){ // 从1到总金额
-            for(int j = 0; j < coins.length;j++){ // 遍历每种面额
-                if(i - coins[j] >= 0){ // 如果当前总金额 >= 当前面额
-                    // dp[i]有两种实现的方式，
-                    // 一种是包含当前的coins[i],那么剩余钱就是 i-coins[i],这种操作要兑换的硬币数是 dp[i-coins[j]] + 1
-                    // 另一种就是不包含，要兑换的硬币数是dp[i]
+        int[] dp = new int[amount+1];  // dp[n]代表凑成总金额所需的最少的硬币个数
+        Arrays.fill(dp,amount+1); // 标记所有dp，因为有些面额是无法拼凑出来的
+        dp[0] = 0; // dp[0] 不用拼
+        for(int i = 1; i <= amount;i++){ // // 从 1 到 amount，计算 dp[]
+            for(int j = 0; j < coins.length;j++){ // 遍历所有面额
+                if(i - coins[j] >= 0){ // 面额不大于总值
+                    // 转移公式：dp[n] = dp[n - coins[j]] + coins[j];
                     dp[i] = Math.min(dp[i],dp[i-coins[j]] + 1);
                 }
             }
         }
-        return dp[amount] == (amount+1) ? -1 : dp[amount]; // 如果dp[] == 标记则为 -1 否则不变
+        // 如果dp[amount] == amount+1，即无法拼凑出则为 -1 否则不变
+        return dp[amount] == (amount+1) ? -1 : dp[amount];
     }
+
+
+    // Sugar：与官方类似
+//    public static int coinChange(int[] coins, int amount) {
+//        // dp[n]的值： 表示的凑成总金额为n所需的最少的硬币个数
+//        int[] dp = new int[amount+1];
+//        // 给dp赋初值，最多的硬币数就是全部使用面值1的硬币进行换
+//        // 标记。 amount + 1 是不可能达到的换取数量，于是使用其进行填充
+//        Arrays.fill(dp,amount+1);
+//        dp[0] = 0; // 金额为0，dp也为0
+//        for(int i = 1; i <= amount;i++){ // 从1到总金额
+//            for(int j = 0; j < coins.length;j++){ // 遍历每种面额
+//                if(i - coins[j] >= 0){ // 如果当前总金额 >= 当前面额
+//                    // dp[i]有两种实现的方式，
+//                    // 一种是包含当前的coins[i],那么剩余钱就是 i-coins[i],这种操作要兑换的硬币数是 dp[i-coins[j]] + 1
+//                    // 另一种就是不包含，要兑换的硬币数是dp[i]
+//                    dp[i] = Math.min(dp[i],dp[i-coins[j]] + 1);
+//                }
+//            }
+//        }
+//        return dp[amount] == (amount+1) ? -1 : dp[amount]; // 如果dp[] == 标记则为 -1 否则不变
+//    }
 
     // 这个写法用了语法糖，比官方答案快1ms，逻辑与官方基本一致
     /*

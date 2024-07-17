@@ -33,11 +33,10 @@ public class LeetCode_279 {
     public static int numSquares(int n) {
         // dp[n]代表数n最少等于多少个平方数之和
         int[] dp = new int[n+1];
-        for(int i = 1; i <= n; i++){
+        for(int i = 1; i <= n; i++){ // 从f[1]开始求，求f[2] 直到 f[n]。
             int temp = Integer.MAX_VALUE; // 对应f[n - j * j]，初始化为Integer最大值
             // 转移公式：f[n] = f[n - j * j] + j * j
-            for(int j = 1; j * j <= i; j++){
-                // 从f[1]开始求，求f[2] 直到 f[n]。
+            for(int j = 1; j * j <= i; j++){ // 这块for循环代码是求 n = i时，f[n - j * j]的最小值
                 temp = Math.min(temp, dp[i - j * j]);
             }
             // dp[i] = temp + 1(dp[i]对应f[n]，temp对应f[n - j * j]，1对应j * j)
