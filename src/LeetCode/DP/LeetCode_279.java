@@ -27,19 +27,21 @@ public class LeetCode_279 {
 
     // 第二次未解出，
     /*
-    核心思想是：定义f[i] 表示最少需要多少个数的平方来表示整数 i。f[n] = f[n - j * j] + j * j(任何符合中的最小值)。
-    要找f[n]，则必须知道f[n - j * j]，显然 n - j * j 比 n 小，那么求 f[n] 就可以一直简化到求 f[1]，也就是说从 f[1] 求到 f[n]。
+    核心思想是：一个数 n 等于多个完全平方数之和，那么有 n = (n - j * j) + j * j，注意j * j <= n。
+    定义f[i] 表示最少需要多少个数的平方来表示整数 i。
+    转移公式：f[n] = f[n - j * j] + 1。所以核心在于求 f[n - j * j]的最小值
+    要找f[n]，则必须知道f[n - j * j]的最小值，显然 n - j * j 比 n 小，那么求 f[n] 就可以一直简化到求 f[1]，也就是说从 f[1] 求到 f[n]。
      */
     public static int numSquares(int n) {
         // dp[n]代表数n最少等于多少个平方数之和
         int[] dp = new int[n+1];
         for(int i = 1; i <= n; i++){ // 从f[1]开始求，求f[2] 直到 f[n]。
             int temp = Integer.MAX_VALUE; // 对应f[n - j * j]，初始化为Integer最大值
-            // 转移公式：f[n] = f[n - j * j] + j * j
-            for(int j = 1; j * j <= i; j++){ // 这块for循环代码是求 n = i时，f[n - j * j]的最小值
+            for(int j = 1; j * j <= i; j++){ // 满足i = (i - j * j) + j * j
+                // 求f[n - j * j]的最小值
                 temp = Math.min(temp, dp[i - j * j]);
             }
-            // dp[i] = temp + 1(dp[i]对应f[n]，temp对应f[n - j * j]，1对应j * j)
+            // 求到了f[n - j * j]的最小值，dp[i] = temp + 1(dp[i]对应f[n]，temp对应f[n - j * j]，1对应j * j)
             dp[i] = temp + 1;
         }
         return dp[n];
