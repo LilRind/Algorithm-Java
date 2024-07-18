@@ -48,7 +48,57 @@ public class LeetCode_152 {
          */
     }
 
-    // 再写，第一次写更改后
+    // 2
+    /*
+    核心思想是：用maxProd、minProd分别存当前子数组的最大、最小乘积，因为最小的负数乘以负数可能变为最大乘积
+    转换方程，maxProd = Math.max(nums[i], maxProd * nums[i])。minProd = Math.min(nums[i], minProd * nums[i])
+     */
+    public static int maxProduct(int[] nums) {
+        // 如果数组为空，返回0
+        if (nums.length == 0) return 0;
+
+        // 初始化三个变量：
+        // maxProd - 当前子数组的最大乘积
+        // minProd - 当前子数组的最小乘积，因为负数乘以负数可以变成正数
+        // res - 结果，存储最大乘积
+        int maxProd = nums[0];
+        int minProd = nums[0];
+        int res = nums[0];
+
+        // 从数组的第二个元素开始遍历
+        for (int i = 1; i < nums.length; i++) {
+            // 负数乘以 minProd（最小乘积）可能会变成最大的正数
+            // 如果当前元素为负数，交换 maxProd 和 minProd，因为之后要更新 maxProd、minProd
+            // 由于 nums[i] < 0， 那么 maxProd 和 minProd 需要交换，才能保证maxProd，minProd正确更新
+            if (nums[i] < 0) {
+                int temp = maxProd;
+                maxProd = minProd;
+                minProd = temp;
+            }
+
+            // 计算当前元素作为新子数组起点的最大乘积和最小乘积
+            maxProd = Math.max(nums[i], maxProd * nums[i]); // 更新maxProd，比较当前元素nums[i] 与 maxProd * nums[i]的大小
+            minProd = Math.min(nums[i], minProd * nums[i]); // 更新minProd，比较当前元素nums[i] 与 minProd * nums[i]的大小
+
+            // 更新结果 res 为当前所有子数组乘积中的最大值
+            res = Math.max(res, maxProd);
+        }
+
+        // 返回结果 res
+        return res;
+    }
+
+
+
+
+
+    // 1，存在一点小问题
+/*
+    // 这个算法无法解决，输入 = [0,10,10,10,10,10,10,10,10,10,-10,10,10,10,10,10,10,10,10,10,0]的情况
+    // 其它情况下，这是最简单且运行时间最小的解法之一。
+    // 由于负数的出现，会导致之前的最大变成最小，导致后续可能出现的最大变成负数，所以反向再遍历一次求最大。
+
+    // 简化版
     public static int maxProduct(int[] nums) {
         int res = nums[0]; // 确保返回的结果至少是nums中的单个元素
         int ans = 1; // 保留每个连续非空连续子数组的乘积
@@ -66,66 +116,7 @@ public class LeetCode_152 {
         return res;
     }
 
-    // 第一次未解出，存在一点小问题
-    /*
-    public static int maxProduct(int[] nums) {
-        int res = nums[0];
-        int ans = 1;
-        for (int i = 0; i < nums.length; i++) {
-            if(nums[i] == 0) ans = 1;
-            ans *= nums[i];
-            res = Math.max(res, ans);
-        }
-        ans = 1;
-        for (int i = nums.length-1; i >= 0; i--) {
-            if(nums[i] == 0) ans = 1;
-            ans *= nums[i];
-            res = Math.max(res, ans);
-        }
-        return res;
-    }
-     */
-
-    // 这是之前做的
-    /*
-    public static int maxProduct(int[] nums) {
-        // 获取输入数组的长度
-        int length = nums.length;
-
-        // 初始化数组以存储以第i个索引结尾的最大和最小乘积
-        int[] maxF = new int[length];
-        int[] minF = new int[length];
-
-        // 将输入数组 nums 复制到 maxF 和 minF
-        System.arraycopy(nums, 0, maxF, 0, length);
-        System.arraycopy(nums, 0, minF, 0, length);
-
-        // 计算以每个索引结尾的最大和最小乘积
-        for (int i = 1; i < length; ++i) {
-            // 更新 maxF[i]，nums[i]>0，选取nums * maxF前一位的最大值；nums<0，选取nums * maxF前一位的最小值，与nums[i]比较
-            maxF[i] = Math.max(maxF[i - 1] * nums[i], Math.max(nums[i], minF[i - 1] * nums[i]));
-
-            // 更新 minF[i]，nums[i]>0，选取nums * maxF前一位的最小值；nums<0，选取nums * maxF前一位的最大值，与nums[i]比较
-            minF[i] = Math.min(minF[i - 1] * nums[i], Math.min(nums[i], maxF[i - 1] * nums[i]));
-        }
-
-        // 在所有子数组中找到最大乘积
-        int ans = maxF[0];
-        for (int i = 1; i < length; ++i) {
-            ans = Math.max(ans, maxF[i]);
-        }
-
-        // 返回最大乘积
-        return ans;
-    }
-     */
-
-}
-
-// 这是最简单的做法。由于负数的出现，会导致之前的最大变成最小，导致后续可能出现的最大变成负数，所以反向再遍历一次求最大。
-/*
-
-class Solution {
+    // 未简化版
     public int maxProduct(int[] nums) {
         // 初始化乘积为1，并获取数组长度
         int product = 1, n = nums.length;
@@ -163,6 +154,7 @@ class Solution {
         // 返回最大乘积
         return max;
     }
+*/
+
 }
 
-*/
