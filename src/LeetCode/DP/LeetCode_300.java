@@ -39,24 +39,52 @@ public class LeetCode_300 {
         */
     }
 
-    // 第一次未解出。
+    // 2
+    /*
+    核心思想：动态规划 + 二分查找
+    构建一个数组 tails 用于存储最长递增子序列，注意是有序的，遍历nums中的每个元素，
+    以二分查找的找到要插入的位置，注意因为二分查找，所以插入的位置还是不会打乱其它位置的原有顺序
+    最后num插入的位置是否末尾之后，是的话res++，下一循环j=res(j又指向tail数组的末尾)
+    */
     public static int lengthOfLIS(int[] nums) {
-        // res代表最长递增子序列的长度。因为逻辑判断是当nums[j] < nums[i]才进行dp[]更新
-        int len = nums.length, res = 1;
-        // dp[i] 代表以 nums[i] 结尾的最长子序列长度。注意这里不是前i位的最长递增子序列长度
-        int[] dp = new int[len];
-        Arrays.fill(dp, 1);
-        for (int i = 1; i < len; i++) {
-            for (int j = 0; j < i; j++){
-                if(nums[j] < nums[i]){ // 当nums[j] < nums[i]才进行dp[]更新
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
-                    res = Math.max(res, dp[i]);
-                }
+        // 创建一个数组 tails 用于存储最长递增子序列，注意是有序的
+        int[] tails = new int[nums.length];
+        // res 表示当前找到的最长递增子序列的长度
+        int res = 0;
+        // 遍历输入数组中的每一个元素，让每个元素在talis数组找到一个位置，有可能会替换掉原有元素
+        for(int num : nums) {
+            int i = 0, j = res; // 初始化二分查找的起始下标 i 和结束下标 j
+            // 进行二分查找，找到 num 应该插入的位置
+            while(i < j) { // 当起始下标小于末尾下标时，区间是左闭右开，范围是 [i, j)。
+                int m = (i + j) / 2; // 计算中间下标
+                if(tails[m] < num) i = m + 1; // 如果 tails[m] 小于 num，说明 num 应该在右半部分
+                else j = m; // 否则，num 应该在左半部分或者替换 tails[m]
             }
+            tails[i] = num; // 将 num 放在找到的位置 i，可能会替换掉原有元素，左闭右开，替换的是左下标i的元素tails[i]
+            // 如果 j 等于 res，说明num插入的位置是末尾之后，即j之后，要更新res ++，下一个循环j = res
+            if(res == j) res++;
         }
-
-        return res;
+        return res; // 返回最长递增子序列的长度
     }
+
+
+    // 第一次未解出。
+//    public static int lengthOfLIS(int[] nums) {
+//        // res代表最长递增子序列的长度。因为逻辑判断是当nums[j] < nums[i]才进行dp[]更新
+//        int len = nums.length, res = 1;
+//        // dp[i] 代表以 nums[i] 结尾的最长子序列长度。注意这里不是前i位的最长递增子序列长度
+//        int[] dp = new int[len];
+//        Arrays.fill(dp, 1);
+//        for (int i = 1; i < len; i++) {
+//            for (int j = 0; j < i; j++){
+//                if(nums[j] < nums[i]){ // 当nums[j] < nums[i]才进行dp[]更新
+//                    dp[i] = Math.max(dp[i], dp[j] + 1);
+//                    res = Math.max(res, dp[i]);
+//                }
+//            }
+//        }
+//        return res;
+//    }
 
     // K神：纯动态规划。O(N^2)，O(N)
     /*
