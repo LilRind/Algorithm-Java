@@ -38,7 +38,8 @@ public class LeetCode_53 {
     转移方程：dp[n] = dp[n - 1] + nums[n] 或者 nums[n]
     因为要以nums[n]结尾，所以如果dp[n - 1] > 0，则dp[n] = dp[n - 1] + nums[n]
     如果dp[n - 1] < 0，则dp[n] = nums[n]，不用加上dp[n - 1]
-    由于每次计算转移方程时，只需要知道 dp[n - 1]，所以完全可以只用一个变量sum来存储，只不过我们初始化要为1
+    由于每次计算转移方程时，只需要知道 dp[n - 1]，所以完全可以只用一个变量sum来存储，只不过我们初始化要为0
+    转移方程就变成了：sum(下一个) = Math.max(0, sum) + nums[i]
      */
     // 2
     public static int maxSubArray(int[] nums) {
