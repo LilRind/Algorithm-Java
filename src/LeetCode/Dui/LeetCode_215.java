@@ -1,4 +1,4 @@
-package LeetCode.ShuZu;
+package LeetCode.Dui;
 
 // 官方：快速选择、堆排序
 // https://leetcode.cn/problems/kth-largest-element-in-an-array/solutions/307351/shu-zu-zhong-de-di-kge-zui-da-yuan-su-by-leetcode-/
