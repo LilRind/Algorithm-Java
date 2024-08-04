@@ -15,7 +15,8 @@ public class LeetCode_1 {
         System.out.println(Arrays.toString(twoSum(c, 6)));
 
     }
-    // 第2次解出
+
+    // 3
     public static int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
@@ -24,8 +25,20 @@ public class LeetCode_1 {
             }
             map.put(nums[i], i);
         }
-        return new int[]{};
+        return new int[0];
     }
+
+    // 第2次解出
+//    public static int[] twoSum(int[] nums, int target) {
+//        Map<Integer, Integer> map = new HashMap<>();
+//        for (int i = 0; i < nums.length; i++) {
+//            if(map.containsKey(target - nums[i])){
+//                return new int[]{map.get(target - nums[i]), i};
+//            }
+//            map.put(nums[i], i);
+//        }
+//        return new int[]{};
+//    }
 
     // 第一次解出，注意map的用法名称
 //    public static int[] twoSum(int[] nums, int target) {
