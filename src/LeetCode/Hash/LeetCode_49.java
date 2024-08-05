@@ -9,33 +9,47 @@ import java.util.*;
 // 官方：排序 (简单，掌握)、计数 (稍难)
 // https://leetcode.cn/problems/group-anagrams/solutions/520469/zi-mu-yi-wei-ci-fen-zu-by-leetcode-solut-gyoc/?envType=study-plan-v2&envId=top-100-liked
 
-// 灵神：排序 (掌握，代码很少，难点在 Lambda 表达式)
+// 灵神：排序 (尽量掌握，代码很少，难点在 map.computeIfAbsent 和 Lambda 表达式)
 // https://leetcode.cn/problems/group-anagrams/solutions/2718519/ha-xi-biao-fen-zu-jian-ji-xie-fa-pythonj-1ukv/?envType=study-plan-v2&envId=top-100-liked
 
 public class LeetCode_49 {
     public static void main(String[] args) {
+        String[] strs1 = new String[]{"eat", "tea", "tan", "ate", "nat", "bat"};
+        System.out.println(groupAnagrams(strs1));
 
+        String[] strs2 = new String[]{""};
+        System.out.println(groupAnagrams(strs2));
 
+        String[] strs3 = new String[]{"a"};
+        System.out.println(groupAnagrams(strs3));
     }
 
-    // 3
+    // 4
     public static List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
 
         for (String s: strs){
             char[] chars = s.toCharArray();
             Arrays.sort(chars);
-            String key = new String(chars);
-            List<String> strList = map.getOrDefault(key, new ArrayList<String>());
-            strList.add(s);
-            map.put(key, strList);
+            map.computeIfAbsent(new String(chars), v -> new ArrayList<>()).add(s);
         }
-        return new ArrayList<List<String>>(map.values());
+        return new ArrayList<>(map.values());
     }
 
-
-
-
+    // 3
+//    public static List<List<String>> groupAnagrams(String[] strs) {
+//        Map<String, List<String>> map = new HashMap<>();
+//
+//        for (String s: strs){
+//            char[] chars = s.toCharArray();
+//            Arrays.sort(chars);
+//            String key = new String(chars);
+//            List<String> strList = map.getOrDefault(key, new ArrayList<String>());
+//            strList.add(s);
+//            map.put(key, strList);
+//        }
+//        return new ArrayList<List<String>>(map.values());
+//    }
 
     // 2
 //    public List<List<String>> groupAnagrams(String[] strs) {
