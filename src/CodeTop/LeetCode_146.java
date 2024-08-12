@@ -67,12 +67,12 @@ class LRUCache {
     }
 
     public int get(int key) { // 通过key获取节点的值
-        Node node = getNode(key); // 调用获取节点方法
-        return node != null ? node.value : -1; // 判断节点是否存在，存在返回值
+        Node node = getNode(key); // 先调用获取节点方法去获取节点
+        return node != null ? node.value : -1; // 再判断节点是否存在，存在返回值
     }
 
     public void put(int key, int value) { // 通过 key、value 新增或修改
-        Node node = getNode(key); // 先通过 key 获取这个节点
+        Node node = getNode(key); // 先通过 key 获取这个节点，获取节点时会将节点置为头节点
         if (node != null) { // 节点存在，是修改操作
             node.value = value; // 更新 value
             return;
