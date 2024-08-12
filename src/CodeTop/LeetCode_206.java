@@ -1,8 +1,6 @@
-package LeetCode.LianBiao;
+package CodeTop;
 
 import LeetCode.LianBiao.ListNode.ListNode;
-
-import java.util.List;
 
 import static LeetCode.LianBiao.ListNode.ListNode.printNodes;
 
