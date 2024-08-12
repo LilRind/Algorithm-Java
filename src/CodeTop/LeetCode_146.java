@@ -81,7 +81,7 @@ class LRUCache {
         keyToNode.put(key, node); // 放入 HashMap 中
         pushFront(node); // 将节点置为链表头节点
         // 加入之后，要判断 Map 的大小是否大于容量
-        if (keyToNode.size() > capacity) { // 如果 HashMap 实际数量 > 容量
+        if (keyToNode.size() > capacity) { // 如果 HashMap 实际数量 > 容量，需要去掉 Map、链表中的末尾元素
             Node backNode = dummy.prev; // 通过哨兵节点的 prev 指针获取链表中的末尾节点
             keyToNode.remove(backNode.key); // 通过 key 去掉 Map 中的末尾节点
             remove(backNode); // 在链表中去掉末尾节点
@@ -90,7 +90,7 @@ class LRUCache {
 
     // 通过 key 查询节点。不存在直接返回、存在要再链表中移除再置为头节点，再返回。
     private Node getNode(int key) { // 通过 key 获取节点。节点存在、或不存在
-        if (!keyToNode.containsKey(key)) { // 如果 Map 中不存在该节点
+        if (!keyToNode.containsKey(key)) { // 如果 Map 中不存在该节点，通过 key 查找
             return null;
         }
         Node node = keyToNode.get(key); // 节点存在，从 Map 中获取该节点
