@@ -72,7 +72,7 @@ class LRUCache {
     }
 
     public void put(int key, int value) { // 通过 key、value 新增或修改
-        Node node = getNode(key); // 先通过 key 获取这个节点，获取节点时会将节点置为头节点
+        Node node = getNode(key); // 先通过 key 获取这个节点，获取节点时如果节点存在会将节点置为头节点
         if (node != null) { // 节点存在，是修改操作
             node.value = value; // 更新 value
             return;
