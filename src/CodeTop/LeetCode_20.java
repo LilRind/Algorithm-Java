@@ -28,14 +28,14 @@ public class LeetCode_20 {
     public static boolean isValid(String s) {
         if (s.length() % 2 != 0) return false; // s 长度必须是偶数
         Deque<Character> st = new ArrayDeque<>();
-        for (char c : s.toCharArray()) {
-            if (c == '(') {
+        for (char c : s.toCharArray()) { // 对每个字符判断，是左括号入栈，非左括号字符需要栈中的左括号出栈匹配
+            if (c == '(') { // 3 个入栈操作
                 st.push(')'); // c 对应的右括号入栈
             } else if (c == '[') {
                 st.push(']');
             } else if (c == '{') {
                 st.push('}');
-            } else if (st.isEmpty() || st.pop() != c) { // 如果 c 是右括号，就要和栈弹出的字符匹配，不匹配返回false
+            } else if (st.isEmpty() || st.pop() != c) { // 弹出，如果栈为空则匹配失败、如果 c 不与栈弹出的右括号匹配则失败
                 return false; // 没有左括号，或者左括号类型不对
             }
         }
@@ -53,7 +53,7 @@ public class LeetCode_20 {
         }};
         Deque<Character> st = new ArrayDeque<>();
         for (char c : s.toCharArray()) {
-            if (mp.containsKey(c)) { // c 是左括号
+            if (mp.containsKey(c)) { // 如果 Map 中不包括，即不是左括号
                 st.push(mp.get(c)); // c 对应的右括号入栈
             } else if (st.isEmpty() || st.pop() != c) { // c 不是栈弹出的对应右括号 或者栈为空，返回false
                 return false;
@@ -63,19 +63,19 @@ public class LeetCode_20 {
     }
      */
 
-    // 灵神，
+    // 灵神：map + 栈 的另一种写法
     // if (!mp.containsKey(c)) st.push(c); // 不包含才入栈，即"("，"["，"{"和其它字符才入栈。
     /*
     public boolean isValid(String s) {
         if (s.length() % 2 != 0) return false; // s 长度必须是偶数
-        Map<Character, Character> mp = new HashMap<>() {{
+        Map<Character, Character> mp = new HashMap<>() {{ // 记录左括号及其对应右括号
             put(')', '(');
             put(']', '[');
             put('}', '{');
         }};
         Deque<Character> st = new ArrayDeque<>();
         for (char c : s.toCharArray()) {
-            if (!mp.containsKey(c)) { // c 是左括号
+            if (!mp.containsKey(c)) { // 如果 Map 中不包括，即不是右括号
                 st.push(c); // 入栈
             } else if (st.isEmpty() || st.pop() != mp.get(c)) { // c 是右括号
                 return false; // 没有左括号，或者左括号类型不对

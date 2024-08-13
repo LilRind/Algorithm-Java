@@ -30,7 +30,7 @@ public class LeetCode_1 {
             }
             map.put(nums[i], i);
         }
-        return new int[0];
+        return new int[]{}; // 返回空int数组
     }
 
     // 3
@@ -42,7 +42,7 @@ public class LeetCode_1 {
 //            }
 //            map.put(nums[i], i);
 //        }
-//        return new int[0];
+//        return new int[]{};
 //    }
 
     // 第2次解出

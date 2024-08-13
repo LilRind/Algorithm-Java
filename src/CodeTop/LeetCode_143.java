@@ -31,6 +31,7 @@ public class LeetCode_143 {
     public static void reorderList(ListNode head) {
         ListNode mid = middleNode(head);
         ListNode rever = reverseList(mid);
+        // 一次连接两个节点，如果链表最初是偶数，遍历到中间节点就直接结束，也就是说判断中间节点.next 为 null 就结束
         while(rever.next != null){ // 到中间节点就结束了，不用继续循环
             ListNode nxt1 = head.next; // 记录左链表的下一个节点
             ListNode nxt2 = rever.next; // 记录右链表的下一个节点

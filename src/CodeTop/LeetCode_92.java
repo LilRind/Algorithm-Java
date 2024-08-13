@@ -29,6 +29,26 @@ public class LeetCode_92 {
         printNodes(head);
     }
 
+    // 2
+    public static ListNode reverseBetween(ListNode head, int left, int right) {
+        ListNode dummy = new ListNode(0, head), p0 = dummy;
+        for(int i = 0; i < left - 1; i++){
+            p0 = p0.next;
+        }
+        ListNode pre = null, cur = p0.next;
+        for(int j = left; j < right + 1; j++){
+            ListNode nxt = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = nxt;
+        }
+        p0.next.next = cur;
+        p0.next = pre;
+        return dummy.next;
+    }
+
+    // 灵神：先找到left-1节点，再反转left到right+1节点，最后根据left-1、pre、cur节点重新组装
+    /*
     public static ListNode reverseBetween(ListNode head, int left, int right) {
         // dummy 是为了只有两个元素[3,5]准备的，不然会有错
         ListNode dummy = new ListNode(0, head), p0 = dummy; // p0的位置是 left - 1
@@ -42,11 +62,12 @@ public class LeetCode_92 {
             pre = cur; // 前一个节点设为当前节点，最后 pre 的位置是 right
             cur = nxt; // 当前节点设为下一个节点，最后 cur 的位置是 right + 1
         }
-        // 将反转后的子链表正确连接到原链表中
+        // 将反转后的子链表正确连接到原链表中，这两步不能交换，交换会错乱
         p0.next.next = cur; // left节点（p0.next）的下一个节点指向 right + 1。
         p0.next = pre; // left - 1节点的下一个节点指向反转完成后的 right
         return dummy.next;
     }
+    */
 
 }
 
