@@ -6,10 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-// GuangSenNi：使用栈 + 直接判断
-// https://leetcode.cn/problems/valid-parentheses/solutions/9185/valid-parentheses-fu-zhu-zhan-fa-by-jin407891080/
-
-// 灵神：Map + 栈
+// 灵神：栈 + if-else、Map + 栈
 // https://leetcode.cn/problems/valid-parentheses/solutions/2809539/gua-hao-xiao-xiao-le-san-chong-li-yong-z-2xb3/
 
 // 20. 有效的括号
@@ -20,29 +17,10 @@ public class LeetCode_20 {
 
     }
 
-    public static int lengthOfLongestSubstring(String s) {
-        Set<Character> set = new HashSet<>();
-        int res = 0; // 无重复的最长子串的长度
-        int n = s.length();
-        int j = 0; // 滑动窗口右边界
-        for(int i = 0; i < n; i++){
-            if(i > 0){
-                set.remove(s.charAt(i - 1));
-            }
-            while(j < n && !set.contains(s.charAt(j))){
-                set.add(s.charAt(j));
-                j++;
-            }
-            res = Math.max(res, j - i);
-        }
-        return res;
-    }
-
     // 灵神：栈
     public boolean isValid(String s) {
-        if (s.length() % 2 != 0) { // s 长度必须是偶数
-            return false;
-        }
+        if (s.length() % 2 != 0) return false; // s 长度必须是偶数
+        // if(s.isEmpty()) return true; //
         Deque<Character> st = new ArrayDeque<>();
         for (char c : s.toCharArray()) {
             if (c == '(') {
@@ -61,9 +39,7 @@ public class LeetCode_20 {
     // 灵神：map + 栈
     /*
     public boolean isValid(String s) {
-        if (s.length() % 2 != 0) { // s 长度必须是偶数
-            return false;
-        }
+        if (s.length() % 2 != 0) return false; // s 长度必须是偶数
         Map<Character, Character> mp = new HashMap<>() {{
             put('(', ')');
             put('[', ']');
@@ -81,25 +57,25 @@ public class LeetCode_20 {
     }
      */
 
-    // GuangSenNi：使用栈 + 直接判断
+    // 灵神，
+    // if (!mp.containsKey(c)) st.push(c); // 不包含才入栈，即"("，"["，"{"和其它字符才入栈。
     /*
     public boolean isValid(String s) {
-        if(s.isEmpty())
-            return true;
-        Stack<Character> stack=new Stack<Character>();
-        for(char c:s.toCharArray()){
-            if(c=='(')
-                stack.push(')');
-            else if(c=='{')
-                stack.push('}');
-            else if(c=='[')
-                stack.push(']');
-            else if(stack.empty()||c!=stack.pop())
-                return false;
+        if (s.length() % 2 != 0) return false; // s 长度必须是偶数
+        Map<Character, Character> mp = new HashMap<>() {{
+            put(')', '(');
+            put(']', '[');
+            put('}', '{');
+        }};
+        Deque<Character> st = new ArrayDeque<>();
+        for (char c : s.toCharArray()) {
+            if (!mp.containsKey(c)) { // c 是左括号
+                st.push(c); // 入栈
+            } else if (st.isEmpty() || st.pop() != mp.get(c)) { // c 是右括号
+                return false; // 没有左括号，或者左括号类型不对
+            }
         }
-        if(stack.empty())
-            return true;
-        return false;
+        return st.isEmpty(); // 所有左括号必须匹配完毕
     }
      */
 
