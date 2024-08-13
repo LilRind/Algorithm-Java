@@ -37,9 +37,6 @@ public class LeetCode_82 {
     }
 
     // 2
-    public static ListNode deleteDuplicates(ListNode head) {
-
-    }
 
 
     // 灵神：
@@ -59,8 +56,5 @@ public class LeetCode_82 {
         }
         return dummy.next; // 返回删除重复节点之后的头节点
     }
-
-
-
 
 }
