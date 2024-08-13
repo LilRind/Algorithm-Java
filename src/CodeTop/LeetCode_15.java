@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+// 灵神：排序 + 跳过重复、不符合情况 + 双指针
+// https://leetcode.cn/problems/3sum/solutions/1968332/shuang-zhi-zhen-xiang-bu-ming-bai-yi-ge-pno55/?envType=study-plan-v2&envId=top-100-liked
+
 // K神：排序+双指针
 // https://leetcode.cn/problems/3sum/?envType=study-plan-v2&envId=top-100-liked
-
-// 灵神：
-// https://leetcode.cn/problems/3sum/solutions/1968332/shuang-zhi-zhen-xiang-bu-ming-bai-yi-ge-pno55/?envType=study-plan-v2&envId=top-100-liked
 
 // 重点关注
 // 15. 三数之和
@@ -58,7 +59,9 @@ public class LeetCode_15 {
 
     // 2
 
+
     // 灵神：掌握。升序排序、跳过重复组合
+    // 优化是可以省却的，但是会增加时间复杂度。重复是不能省去的，省去就错了。
     /*
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums); // 排序
@@ -85,7 +88,7 @@ public class LeetCode_15 {
     }
      */
 
-    // K神：掌握。排序 + 双指针 + 跳过重复组合
+    // K神：排序 + 双指针 + 跳过重复组合
     /*
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);

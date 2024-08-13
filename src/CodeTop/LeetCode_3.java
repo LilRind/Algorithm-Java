@@ -1,11 +1,10 @@
 package CodeTop;
 
+// 官方：滑动窗口 + 哈希表（Set）
+// https://leetcode.cn/problems/longest-substring-without-repeating-characters/solutions/227999/wu-zhong-fu-zi-fu-de-zui-chang-zi-chuan-by-leetc-2/
 
 // K神：方法一：滑动窗口 + 哈希表（Map）
 // https://leetcode.cn/problems/longest-substring-without-repeating-characters/solutions/2361797/3-wu-zhong-fu-zi-fu-de-zui-chang-zi-chua-26i5/
-
-// 官方：滑动窗口 + 哈希表（Set）
-// https://leetcode.cn/problems/longest-substring-without-repeating-characters/solutions/227999/wu-zhong-fu-zi-fu-de-zui-chang-zi-chuan-by-leetc-2/
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,6 +26,8 @@ public class LeetCode_3 {
         System.out.println(lengthOfLongestSubstring(s3));
     }
 
+    // 5
+
     public static int lengthOfLongestSubstring(String s) {
         Set<Character> set = new HashSet<>();
         int res = 0; // 无重复的最长子串的长度
@@ -46,24 +47,26 @@ public class LeetCode_3 {
     }
 
     // 4.
-//    public static int lengthOfLongestSubstring(String s) {
-//        Set<Character> setC = new HashSet<>();
-//        int res = 0; // 无重复的最长子串的长度
-//        int n = s.length();
-//        int j = 0; // 滑动窗口右边界
-//        for(int i = 0; i < n; i++){
-//            if(i > 0){
-//                setC.remove(s.charAt(i - 1));
-//            }
-//
-//            while(j < n && !setC.contains(s.charAt(j))){
-//                setC.add(s.charAt(j));
-//                j++;
-//            }
-//            res = Math.max(res, j - i);
-//        }
-//        return res;
-//    }
+    // 掌握：官方改进版
+    /*
+    public static int lengthOfLongestSubstring(String s) {
+        Set<Character> set = new HashSet<>(); // 记录窗口中包含的字符
+        int res = 0; // 无重复的最长子串的长度，默认为0，因为可能是空字符串。
+        int n = s.length();
+        int j = 0; // 滑动窗口右边界
+        for(int i = 0; i < n; i++){ // 左边界为 0，意味着至少 i > 0，才能删除set中的元素
+            if(i > 0){ // 如果 i > 0，上一次循环冲突了，需要移除 set 中当前窗口左边界元素
+                set.remove(s.charAt(i - 1));
+            }
+            while(j < n && !set.contains(s.charAt(j))){ // 如果右边界小于 n，且没有冲突，则循环加入 set，并右移 j
+                set.add(s.charAt(j)); // 窗口右边界加入 set
+                j++; // 右移窗口右边界
+            }
+            res = Math.max(res, j - i); // 冲突或者是最后一次循环，把冲突前的窗口大小和记录的无重复最长子串的长度比较
+        }
+        return res;
+    }
+    */
 
 
      // 3.
