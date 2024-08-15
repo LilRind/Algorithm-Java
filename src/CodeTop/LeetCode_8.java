@@ -26,7 +26,33 @@ public class LeetCode_8 {
         System.out.println(myAtoi(s5));
     }
 
+    // 2
+    public static int myAtoi(String s) {
+        if (s == null || s.isEmpty()) return 0;
+        int i = 0, n = s.length(), sign = 1, res = 0;
+
+        while (i < n && s.charAt(i) == ' ') i++;
+
+        if (i < n && (s.charAt(i) == '+' || s.charAt(i) == '-')) {
+            sign = s.charAt(i++) == '+' ? 1 : -1;
+        }
+
+        while (i < n && Character.isDigit(s.charAt(i))) {
+            int digit = s.charAt(i) - '0';
+            if (res > (Integer.MAX_VALUE - digit) / 10) {
+                return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+            res = res * 10 + digit;
+            i++;
+        }
+        return res * sign;
+    }
+
+}
+
+
     // 参照 官方视频 和 younghojan 以及 GPT 所给出的 Java 版本的答案。
+    /*
     public static int myAtoi(String s) {
         if (s == null || s.isEmpty()) return 0;
         int index = 0, n = s.length(), sign = 1, res = 0; // 当前位置、长度、符号位、结果值
@@ -34,10 +60,9 @@ public class LeetCode_8 {
         while (index < n && s.charAt(index) == ' ') { // 跳过前置空格
             ++index;
         }
-
         // 判断是否是正负符号，如果是则对符号位 sign 赋值
         if (index < n && (s.charAt(index) == '+' || s.charAt(index) == '-')) {
-            sign = s.charAt(index++) == '+' ? 1 : -1;
+            sign = s.charAt(index++) == '+' ? 1 : -1; // 注意读到符号位之后，需要往后移
         }
 
         // 一次只处理有效字符串，一旦遇到非数字字符，循环结束
@@ -54,7 +79,7 @@ public class LeetCode_8 {
         }
         return res * sign; // 返回结果，带符号
     }
-}
+     */
 
 // 参照 官方视频 和 younghojan 以及 GPT 的 C++ 版本
 /*
