@@ -53,6 +53,7 @@ public class LeetCode_88 {
     }
 
     // 改进：基于灵神的逆序双指针，判断改为 nums2[p2] >= nums1[p1]
+    /*
     public static void merge(int[] nums1, int m, int[] nums2, int n) {
         int p1 = m - 1, p2 = n - 1, p = m + n - 1;
         while (p2 >= 0) { // nums2 还有要合并的元素
@@ -63,6 +64,7 @@ public class LeetCode_88 {
             }
         }
     }
+     */
 
 
 }
