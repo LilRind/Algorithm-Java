@@ -32,6 +32,20 @@ public class LeetCode_53 {
 
     }
 
+    // 5
+    /*
+    public int maxSubArray(int[] nums) {
+        int n = nums.length;
+        int res = Integer.MIN_VALUE, sum = 0;
+        for(int x : nums){
+            sum = Math.max(sum, 0) + x;
+            res = Math.max(res, sum);
+        }
+        return res;
+    }
+
+     */
+
 
     // 灵神：动态规划（优化后）
     public static int maxSubArray(int[] nums) {

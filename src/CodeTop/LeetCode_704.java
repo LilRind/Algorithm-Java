@@ -18,9 +18,25 @@ public class LeetCode_704 {
         System.out.println(search(b, 2));
     }
 
+    // 5
+    // 左闭右开，需要判断是否越界
+    public static int search(int[] nums, int target) {
+        int i = 0, j = nums.length;
+        while(i < j){
+            int m = i + (j - i) / 2;
+            if(nums[m] < target){
+                i = m + 1;
+            }else{
+                j = m;
+            }
+        }
+        return i < nums.length && nums[i] == target ? i : -1;
+    }
+
     // 4
 
     // 灵神：左闭右闭
+    /*
     public static int search(int[] nums, int target) {
         int i = lowerBound(nums, target); // 先用二分查找，找到位置，再进行判断
         return i < nums.length && nums[i] == target ? i : -1; // 判断i是否大于最大长度，nums[i]是否等于target
@@ -40,6 +56,7 @@ public class LeetCode_704 {
         }
         return left; // 或者 right+1
     }
+    */
 
     // 灵神：左闭右开
     /*

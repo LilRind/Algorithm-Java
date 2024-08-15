@@ -77,7 +77,7 @@ public class LeetCode_232 {
         public int peek() { // 查看栈顶元素，栈内元素不弹出
             if (!B.isEmpty()) return B.peek(); // 如果 B 不为空，返回 B 栈顶元素
             if (A.isEmpty()) return -1; // B 为空的情况下，A 也为空，则没有元素，返回 -1
-            while (!A.isEmpty()){ // A 不为空
+            while (!A.isEmpty()){ // A 不为空，这时需要把 A 的全部元素放入 B 中
                 B.push(A.pop()); // 弹出 A 的元素，放入 B 中
             }
             return B.peek(); // 返回 B 的栈顶元素
@@ -88,6 +88,41 @@ public class LeetCode_232 {
         }
     }
 
+
 }
 
+// 2
+/*
+class MyQueue {
+    private Stack<Integer> A;
+    private Stack<Integer> B;
 
+    public MyQueue(){
+        A = new Stack<>();
+        B = new Stack<>();
+    }
+
+    public int pop(){
+        int peek = peek();
+        B.pop();
+        return peek;
+    }
+
+    public int peek(){
+        if(!B.isEmpty()) return B.peek();
+        if(A.isEmpty()) return -1;
+        while(!A.isEmpty()) B.push(A.pop());
+        return B.peek();
+    }
+
+    public void push(int x){
+        A.push(x);
+    }
+
+    public boolean empty(){
+        return A.empty() && B.empty();
+    }
+
+}
+
+ */

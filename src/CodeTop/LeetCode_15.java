@@ -12,7 +12,7 @@ import java.util.List;
 // K神：排序+双指针
 // https://leetcode.cn/problems/3sum/?envType=study-plan-v2&envId=top-100-liked
 
-// 重点关注
+// 注意一定要排序。
 // 15. 三数之和
 public class LeetCode_15 {
     public static void main(String[] args) {
@@ -31,8 +31,35 @@ public class LeetCode_15 {
             System.out.println(); // 分隔不同测试用例的输出
         }
     }
+    // 4
+    public static List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<>();
+        int n = nums.length;
+        for(int i = 0; i < n - 2; i++){
+            int x = nums[i];
+            if(i > 0 && nums[i - 1] == x) continue;
+            if(x + nums[i + 1] + nums[i + 2] > 0) break;
+            if(x + nums[n - 2] + nums[n - 1] < 0) continue;
+            int j = i + 1, k = n - 1;
+            while(j < k) {
+                int s = x + nums[j] + nums[k];
+                if(s < 0){
+                    j++;
+                }else if(s > 0){
+                    k--;
+                }else{
+                    res.add(List.of(x, nums[j], nums[k]));
+                    for(j++; j < k && nums[j] == nums[j - 1]; j++);
+                    for(k--; k > j && nums[k] == nums[k + 1]; k--);
+                }
+            }
+        }
+        return res;
+    }
 
     // 3
+    /*
     public static List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
         List<List<Integer>> res = new ArrayList();
@@ -56,6 +83,7 @@ public class LeetCode_15 {
         }
         return res;
     }
+    */
 
     // 2
 
