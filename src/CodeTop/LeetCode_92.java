@@ -29,7 +29,7 @@ public class LeetCode_92 {
         printNodes(head);
     }
 
-    // 2
+    // 3
     public static ListNode reverseBetween(ListNode head, int left, int right) {
         ListNode dummy = new ListNode(0, head), p0 = dummy;
         for(int i = 0; i < left - 1; i++){
@@ -46,6 +46,26 @@ public class LeetCode_92 {
         p0.next = pre;
         return dummy.next;
     }
+
+    // 2
+    /*
+    public static ListNode reverseBetween(ListNode head, int left, int right) {
+        ListNode dummy = new ListNode(0, head), p0 = dummy;
+        for(int i = 0; i < left - 1; i++){
+            p0 = p0.next;
+        }
+        ListNode pre = null, cur = p0.next;
+        for(int j = left; j < right + 1; j++){
+            ListNode nxt = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = nxt;
+        }
+        p0.next.next = cur;
+        p0.next = pre;
+        return dummy.next;
+    }
+     */
 
     // 灵神：先找到left-1节点，再反转left到right+1节点，最后根据left-1、pre、cur节点重新组装
     /*

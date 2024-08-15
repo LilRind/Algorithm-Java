@@ -42,7 +42,7 @@ public class LeetCode_102 {
     }
 
     // 3
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public static List<List<Integer>> levelOrder(TreeNode root) {
         if(root == null) return List.of();
         List<List<Integer>> res = new ArrayList<>();
         Deque<TreeNode> q = new ArrayDeque<>();

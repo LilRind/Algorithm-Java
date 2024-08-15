@@ -1,15 +1,18 @@
 package CodeTop;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+// 官方改进版：请看下方
+
 // 官方：滑动窗口 + 哈希表（Set）
 // https://leetcode.cn/problems/longest-substring-without-repeating-characters/solutions/227999/wu-zhong-fu-zi-fu-de-zui-chang-zi-chuan-by-leetc-2/
 
 // K神：方法一：滑动窗口 + 哈希表（Map）
 // https://leetcode.cn/problems/longest-substring-without-repeating-characters/solutions/2361797/3-wu-zhong-fu-zi-fu-de-zui-chang-zi-chua-26i5/
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 // 3. 无重复字符的最长子串（滑动窗口，清晰图解）
 // https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/
@@ -46,6 +49,25 @@ public class LeetCode_3 {
         return res;
     }
 
+    // 5
+    /*
+    public int lengthOfLongestSubstring(String s) {
+        Set<Character> set = new HashSet<>();
+        int res = 0;
+        int n = s.length();
+        for(int i = 0, j = 0; i < n; i++){
+            if(i > 0) set.remove(s.charAt(i - 1));
+            while(j < n && !set.contains(s.charAt(j))){
+                set.add(s.charAt(j));
+                j++;
+            }
+            res = Math.max(res, j - i);
+        }
+        return res;
+    }
+     */
+
+
     // 4.
     // 掌握：官方改进版
     /*
@@ -67,6 +89,22 @@ public class LeetCode_3 {
         return res;
     }
     */
+
+    // 官方改进版。第一层循环控制右指针右移，第二层循环控制左指针右移（了解）
+    /*
+   public int lengthOfLongestSubstring(String s) {
+        int ans = 0;
+        Set<Character> set = new HashSet<>();
+        for (int left = 0, right = 0; right < s.length(); right++) {
+            while (set.contains(s.charAt(right))){
+                set.remove(s.charAt(left++));
+            }
+            set.add(s.charAt(right));
+            ans = Math.max(ans, right - left + 1);
+        }
+        return ans;
+    }
+     */
 
 
      // 3.

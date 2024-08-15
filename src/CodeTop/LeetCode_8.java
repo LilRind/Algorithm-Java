@@ -3,7 +3,7 @@ package CodeTop;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-// 官方视频+ younghojan + GPT
+// 官方视频+ younghojan + GPT（掌握）
 // https://leetcode.cn/problems/string-to-integer-atoi/solutions/183164/zi-fu-chuan-zhuan-huan-zheng-shu-atoi-by-leetcode-/
 
 // 官方：自动机（了解）
@@ -50,7 +50,6 @@ public class LeetCode_8 {
 
 }
 
-
     // 参照 官方视频 和 younghojan 以及 GPT 所给出的 Java 版本的答案。
     /*
     public static int myAtoi(String s) {
@@ -62,7 +61,7 @@ public class LeetCode_8 {
         }
         // 判断是否是正负符号，如果是则对符号位 sign 赋值
         if (index < n && (s.charAt(index) == '+' || s.charAt(index) == '-')) {
-            sign = s.charAt(index++) == '+' ? 1 : -1; // 注意读到符号位之后，需要往后移
+            sign = s.charAt(index++) == '+' ? 1 : -1; // 注意读到符号位之后，当前位置指针 i 需要往后移
         }
 
         // 一次只处理有效字符串，一旦遇到非数字字符，循环结束
