@@ -26,6 +26,8 @@ public class LeetCode_8 {
         System.out.println(myAtoi(s5));
     }
 
+    // 3
+
     // 2
     public static int myAtoi(String s) {
         if (s == null || s.isEmpty()) return 0;
