@@ -1,6 +1,6 @@
 package CodeTop;
 
-// 计数排序
+// 计数排序。面试时可能不让用计数排序。
 // https://leetcode.cn/problems/kth-largest-element-in-an-array/solutions/307351/shu-zu-zhong-de-di-kge-zui-da-yuan-su-by-leetcode-/
 
 // 官方：快速选择、堆排序
@@ -18,49 +18,114 @@ package CodeTop;
 // 重点关注。在学习排序时，重点关注
 // 215. 数组中的第K个最大元素
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class LeetCode_215 {
     public static void main(String[] args) {
+        int[] nums1 = {3,2,1,5,6,4};
+        int[] nums2 = {3,2,3,1,2,4,5,5,6};
 
+        System.out.println(findKthLargest(nums1, 2));
+        System.out.println(findKthLargest(nums2, 4));
     }
 
-    // 快速选择不
     // 使用快速选择算法寻找第 k 大的元素
-    int quickselect(int[] nums, int l, int r, int k) {
-        // 如果 l 和 r 相等，说明找到了第 k 大的元素
+    private static final Random rand = new Random();
+
+    public static int findKthLargest(int[] nums, int k) {
+        int n = nums.length;
+        // 调用快速选择算法找到第 k 大的元素
+        return quickselect(nums, 0, n - 1, n - k);
+    }
+
+    public static int quickselect(int[] nums, int l, int r, int k) {
         if (l == r) return nums[k];
-        // 选取 nums[l] 作为枢轴元素
-        int x = nums[l];
-        // 初始化左右指针 i 和 j
-        int i = l - 1, j = r + 1;
-        // 开始进行划分操作
-        while (i < j) {
-            // 从左向右找到第一个大于等于 x 的元素
-            do i++; while (nums[i] < x);
-            // 从右向左找到第一个小于等于 x 的元素
-            do j--; while (nums[j] > x);
-            // 如果 i < j，则交换两个元素的位置
-            if (i < j) {
-                int tmp = nums[i];
-                nums[i] = nums[j];
-                nums[j] = tmp;
+        // 使用 partition 函数进行划分
+        int pivotIndex = partition(nums, l, r);
+
+        // pivotIndex 是第 k 大元素的位置
+        if (k < pivotIndex)
+            return quickselect(nums, l, pivotIndex - 1, k); // 继续在左侧区间查找
+        else
+            return quickselect(nums, pivotIndex, r, k);
+    }
+
+    public static int partition(int[] nums, int l, int r) {
+        swap(nums, l, l + rand.nextInt(r - l + 1));
+        int pivot = nums[l];
+
+        while (l <= r) {
+            while (nums[l] < pivot) l++;
+            while (nums[r] > pivot) r--;
+
+            if (l <= r) {
+                swap(nums, l, r);
+                l++;
+                r--;
             }
         }
-        // 判断第 k 大的元素在哪个子数组中，继续递归调用快速选择算法
-        if (k <= j) return quickselect(nums, l, j, k); // 0-j 比 nums[l] 小
-        else return quickselect(nums, j + 1, r, k);
+        return l;
     }
 
-    // 寻找数组中第 k 大的元素
-    public int findKthLargest(int[] _nums, int k) {
-        int n = _nums.length;
-        // 调用快速选择算法找到第 k 大的元素（从小往大排序）
-        return quickselect(_nums, 0, n - 1, n - k);
+    public static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
-
-
-
-
 }
+
+// 掌握：随机选取基准 + 双指针排序
+/*
+    private static final Random rand = new Random();
+
+    public static int findKthLargest(int[] nums, int k) {
+        int n = nums.length;
+        // 调用快速选择算法找到第 k 大的元素
+        return quickselect(nums, 0, n - 1, n - k);
+    }
+
+    public static int quickselect(int[] nums, int l, int r, int k) {
+        if (l == r) return nums[k];
+        // 使用 partition 函数进行划分
+        int pivotIndex = partition(nums, l, r);
+
+        // pivotIndex 是第 k 大元素的位置
+        if (k < pivotIndex) {
+            // 继续在左侧区间查找
+            return quickselect(nums, l, pivotIndex - 1, k);
+        } else {
+            // 继续在右侧区间查找
+            return quickselect(nums, pivotIndex, r, k);
+        }
+    }
+
+    public static int partition(int[] nums, int l, int r) {
+        swap(nums, l, l + rand.nextInt(r - l + 1));
+        int pivot = nums[l];
+
+        while (l <= r) {
+            while (nums[l] < pivot) {
+                l++;
+            }
+            while (nums[r] > pivot) {
+                r--;
+            }
+            if (l <= r) {
+                swap(nums, l, r);
+                l++;
+                r--;
+            }
+        }
+        return l;
+    }
+
+    public static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+ */
 
 
 // 计数排序，适用于范围较小且元素重复较多的数组。
@@ -80,43 +145,6 @@ class Solution {
         return 0;
     }
 }
- */
-
-// 掌握
-// 官方：快速选择
-/*
-     // 使用快速选择算法寻找第 k 大的元素
-     int quickselect(int[] nums, int l, int r, int k) {
-         // 如果 l 和 r 相等，说明找到了第 k 大的元素
-         if (l == r) return nums[k];
-         // 选取 nums[l] 作为枢轴元素
-         int x = nums[l];
-         // 初始化左右指针 i 和 j
-         int i = l - 1, j = r + 1;
-         // 开始进行划分操作
-         while (i < j) {
-             // 从左向右找到第一个大于等于 x 的元素
-             do i++; while (nums[i] < x);
-             // 从右向左找到第一个小于等于 x 的元素
-             do j--; while (nums[j] > x);
-             // 如果 i < j，则交换两个元素的位置
-             if (i < j) {
-                 int tmp = nums[i];
-                 nums[i] = nums[j];
-                 nums[j] = tmp;
-             }
-         }
-         // 判断第 k 大的元素在哪个子数组中，继续递归调用快速选择算法
-         if (k <= j) return quickselect(nums, l, j, k); // 0-j 比 nums[l] 小
-         else return quickselect(nums, j + 1, r, k);
-     }
-
-     // 寻找数组中第 k 大的元素
-     public int findKthLargest(int[] _nums, int k) {
-         int n = _nums.length;
-         // 调用快速选择算法找到第 k 大的元素（从小往大排序）
-         return quickselect(_nums, 0, n - 1, n - k);
-     }
  */
 
 
@@ -178,7 +206,7 @@ public int findKthLargest(int[] nums, int k) {
     }
  */
 
-// 优先队列：简单，掌握。面试中很有可能不允许使用
+// 优先队列：简单。面试中很有可能不允许使用
     /*
     public int findKthLargest(int[] nums, int k) {
         PriorityQueue<Integer> heap = new PriorityQueue<>();
